@@ -1,0 +1,81 @@
+﻿Imports System.Windows
+Imports SAP.Middleware.Connector
+
+Public Class Utilidades
+
+    Public Shared Sub Numeros(ByVal CajaTexto As System.Windows.Forms.TextBox, ByVal e As System.Windows.Forms.KeyPressEventArgs)
+        If Char.IsDigit(e.KeyChar) Then
+            e.Handled = False
+        ElseIf Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
+    End Sub
+    Public Shared Sub CargarCombo(ByRef control As Forms.ComboBox, ByVal items As Dictionary(Of Object, Object), ByVal itemTodos As Boolean, Optional ByVal texto As String = "-TOD@S-")
+        Dim objDatatable As New DataTable()
+        Dim objRow As DataRow
+        objDatatable.Columns.Add("key")
+        objDatatable.Columns.Add("item")
+        objRow = objDatatable.NewRow
+        If itemTodos Then
+            objRow = objDatatable.NewRow
+            objRow.Item(0) = "0"
+            objRow.Item(1) = texto
+            objDatatable.Rows.InsertAt(objRow, 0)
+        End If
+
+        For Each item As KeyValuePair(Of Object, Object) In items
+            Dim objArray() As Object = {item.Key, item.Value}
+            objDatatable.Rows.Add(objArray)
+        Next
+
+        control.DisplayMember = "item"
+        control.ValueMember = "key"
+        control.DataSource = objDatatable
+
+    End Sub
+    Public Shared Function getUsuario() As String
+        Return My.User.Name.ToUpper.Replace("ALIAR\", "")
+    End Function
+    Public Shared Sub NumerosyDecimal(ByVal CajaTexto As System.Windows.Forms.TextBox, ByVal e As System.Windows.Forms.KeyPressEventArgs)
+        If Char.IsDigit(e.KeyChar) Then
+            e.Handled = False
+        ElseIf Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        ElseIf e.KeyChar = "." And Not CajaTexto.Text.IndexOf(".") Then
+            e.Handled = True
+        ElseIf e.KeyChar = "." Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
+    End Sub
+
+    Public Shared Function ConvertToDotNetTable(ByVal RFCTable As IRfcTable) As DataTable
+        Dim dtTable As DataTable = New DataTable()
+
+        For item As Integer = 0 To RFCTable.ElementCount - 1
+            Dim metadata As RfcElementMetadata = RFCTable.GetElementMetadata(item)
+            dtTable.Columns.Add(metadata.Name)
+        Next
+
+        For Each row As IRfcStructure In RFCTable
+            Dim dr As DataRow = dtTable.NewRow()
+
+            For item As Integer = 0 To RFCTable.ElementCount - 1
+                Dim metadata As RfcElementMetadata = RFCTable.GetElementMetadata(item)
+
+                If metadata.DataType = RfcDataType.BCD AndAlso metadata.Name = "ABC" Then
+                    dr(item) = row.GetInt(metadata.Name)
+                Else
+                    dr(item) = row.GetString(metadata.Name)
+                End If
+            Next
+
+            dtTable.Rows.Add(dr)
+        Next
+
+        Return dtTable
+    End Function
+End Class

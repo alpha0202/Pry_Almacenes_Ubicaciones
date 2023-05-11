@@ -1,0 +1,92 @@
+﻿{
+  "columnas": [ "A", "B", "C" ],
+  "filas": 5,
+  "celdas": [
+    {
+      "columna": "A",
+      "fila": 1,
+      "cantidad_posiciones": 3,
+      "posiciones": [
+        {
+          "nombre": "A3033",
+          "orden": 1
+        },
+        {
+          "nombre": "A3032",
+          "orden": 2
+        },
+        {
+          "nombre": "A3031",
+          "orden": 3
+        }
+      ]
+    },
+    {
+      "columna": "A",
+      "fila": 4,
+      "cantidad_posiciones": 3,
+      "posiciones": [
+        {
+          "nombre": "A3041",
+          "orden": 1
+        },
+        {
+          "nombre": "A3042",
+          "orden": 2
+        },
+        {
+          "nombre": "A3043",
+          "orden": 3
+        }
+      ]
+    },
+    {
+      "columna": "B",
+      "fila": 1,
+      "cantidad_posiciones": 3,
+      "posiciones": [
+        {
+          "nombre": "B3033",
+          "orden": 1
+        },
+        {
+          "nombre": "B3031",
+          "orden": 3
+        }
+      ]
+    },
+    {
+      "columna": "C",
+      "fila": 4,
+      "cantidad_posiciones": 4,
+      "posiciones": [
+        {
+          "nombre": "C8501",
+          "orden": 1
+        },
+        {
+          "nombre": "C9584",
+          "orden": 4
+        }
+
+      ]
+    },
+    {
+      "columna": "C",
+      "fila": 5,
+      "cantidad_posiciones": 4,
+      "posiciones": [
+        {
+          "nombre": "C9585",
+          "orden": 1
+        },
+        {
+          "nombre": "C9586",
+          "orden": 3
+        }
+
+      ]
+    }
+  ]
+
+}

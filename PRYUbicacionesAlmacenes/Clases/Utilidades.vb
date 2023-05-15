@@ -78,4 +78,30 @@ Public Class Utilidades
 
         Return dtTable
     End Function
+
+    'determinar si un formulario ya se encuetra abierto.
+    Public Function IsFormOpen(ByVal formName As String) As Boolean
+
+        ' Recorremos la colección de formularios
+        ' actualmente abiertos.
+        '
+        For Each frm As Form In My.Application.OpenForms
+
+            If (frm.Name.ToLower() = formName.ToLower()) Then
+
+                frm.Dispose()
+                Return True
+            End If
+
+        Next
+
+        Return False
+
+    End Function
+
+
+
+
+
+
 End Class

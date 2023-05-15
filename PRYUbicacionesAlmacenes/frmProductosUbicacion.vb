@@ -44,4 +44,6 @@ Public Class frmProductosUbicacion
             Me.Dispose()
         End If
     End Sub
+
+
 End Class

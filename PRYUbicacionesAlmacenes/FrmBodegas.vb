@@ -15,16 +15,23 @@ Public Class FrmBodegas
     Dim dtJCelda As DataTable
     Dim dtTotalOrdenCel As DataTable
     Private listaCeldas As List(Of FlowLayoutPanel) = New List(Of FlowLayoutPanel)
+    Public Solicitud_Ubicacion As Boolean = False
+    Public form_solicita As String = String.Empty
 
     Sub New()
-         
+
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
         Me.WindowState = FormWindowState.Maximized
-
+        'llenarCboCentroOper()
+        'CargarMateriales()
+        'Me.Solicitud_Ubicacion = solicitaUbi
 
 
     End Sub
+
+
+
 
     'Pintado completo de todas las ubicaciones con las diferentes columnas y filas.
     'Private Sub PintarBodega(celdas As List(Of Celdas), columnas As List(Of Columna), filas As List(Of Filas), totalFilas As Integer, dtColumna As DataTable, dtFila As DataTable, dtTotalOrdenCelda As DataTable)
@@ -205,10 +212,13 @@ Public Class FrmBodegas
 
         llenarCboCentroOper()
         CargarMateriales()
+        chkRestablece.Visible = False
         ''CargueUbicaciones()
 
 
     End Sub
+
+
 
     Private Sub cboCentroOpe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCentroOpe.SelectedIndexChanged
 
@@ -313,27 +323,51 @@ Public Class FrmBodegas
 
     Private Sub MostrarMaterial(sender As Object, e As System.EventArgs, posicion As Posiciones) 'Mostrar en formulario splash, el contenido de la ubicación.
         Try
-            SplashScreenManager.ShowForm(Me, GetType(WaitForm1), True, True, False)
+            'SplashScreenManager.ShowForm(Me, GetType(WaitForm1), True, True, False)
             Dim ubicacionName = posicion.Nombre
             Dim ubicacionDesc = posicion.Descripcion
 
-            Dim conexion As clsConexionNew = New clsConexionNew()
-            Dim LstParametros As New List(Of Parametros)()
-            LstParametros.Add(New Parametros("@ubicacion", ubicacionName, SqlDbType.VarChar))
-            Dim dt As DataTable = New DataTable
-            dt = conexion.SPObtenerDataTable("SP_GetMaterialesxUbicacion", LstParametros)
+            If Not Solicitud_Ubicacion Then
+                Dim conexion As New clsConexionNew()
+                Dim LstParametros As New List(Of Parametros)()
+                LstParametros.Add(New Parametros("@ubicacion", ubicacionName, SqlDbType.VarChar))
+                Dim dt As New DataTable
+                dt = conexion.SPObtenerDataTable("SP_GetMaterialesxUbicacion", LstParametros)
 
 
-            SplashScreenManager.CloseForm(False)
-            Dim f As frmProductosUbicacion = New frmProductosUbicacion(dt, ubicacionName, ubicacionDesc)
-            f.ShowDialog()
-            f.Dispose()
+                SplashScreenManager.CloseForm(False)
+                Dim f As frmProductosUbicacion = New frmProductosUbicacion(dt, ubicacionName, ubicacionDesc)
+                f.ShowDialog()
+                f.Dispose()
+
+            Else
+
+                If form_solicita = "REC" Then
+
+                    frmRecepcion.RecibirUbicacion(posicion.Nombre)
+
+                ElseIf form_solicita = "DEV" Then
+
+                    frmDevoluciones.RecibirUbicacion(posicion.Nombre)
+
+                End If
+
+                XtraMessageBox.Show("Ubicación Seleccionada", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.Close()
+
+            End If
+
 
         Catch ex As Exception
             SplashScreenManager.CloseForm(False)
             XtraMessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
+
+    End Sub
+
+
+    Private Sub TomarUbicacionDestino(sender As Object, e As System.EventArgs)
 
     End Sub
 
@@ -350,9 +384,9 @@ Public Class FrmBodegas
         'extracción de datos por cada datatable
         dtCelda = ds.Tables(0)
         dtPosicion = ds.Tables(1)
-        'dtTotalOrdenCel = ds.Tables(3)
         dtColumnas = ds.Tables(2)
         dtFilas = ds.Tables(3)
+        'dtTotalOrdenCel = ds.Tables(3)
         'dtFilasUbicaciones = ds.Tables(6)
 
 
@@ -526,12 +560,7 @@ Public Class FrmBodegas
 
 
 
-    Private Sub LimpiarControles()
-        flpColumnas.Controls.Clear()
-        flpFilas.Controls.Clear()
-        flpGrupoCeldas.Controls.Clear()
 
-    End Sub
 
     'dibuja las ubicaciones a partir de los filtros. 
     Private Sub ModelarUbicaciones(celdas As List(Of Celdas), columnas As List(Of Columna), filas As List(Of Filas), totalFilas As Integer, dtColumna As DataTable, dtFila As DataTable, dtTotalOrdenCelda As DataTable)
@@ -599,7 +628,7 @@ Public Class FrmBodegas
                 listaCeldas.Add(flpCell)
 
 
-                Dim celda As Celdas = GetCelda(celdas, nombreCol, j + 1)
+                Dim celda As Celdas = CType(GetCelda(celdas, nombreCol, j + 1), Celdas)
                 If celda IsNot Nothing Then
                     'Agregar los botones
                     For k = 0 To celda.CantidadPosiciones - 1
@@ -611,7 +640,8 @@ Public Class FrmBodegas
                                 .Text = posicion.Nombre,
                                 .Height = flpCell.Height - 5,
                                 .Width = IIf(celda.CantidadPosiciones > 1, (flpCell.Width / celda.CantidadPosiciones) - 10, (flpCell.Width / celda.CantidadPosiciones) - 30),
-                                .TextAlign = ContentAlignment.MiddleCenter
+                                .TextAlign = ContentAlignment.MiddleCenter,
+                                .BackColor = IIf(ExisteMaterial(posicion), Color.FromArgb(110, 155, 235), Color.FromArgb(200, 216, 228))
                             }
                             flpCell.Controls.Add(btn)
                             SetClickBotonPosicion(btn, Sub(sender, args)
@@ -664,6 +694,7 @@ Public Class FrmBodegas
         'cboCentroOpe.SelectedIndex = 0
         'cboBodega.SelectedIndex = 0
         'txtCentroOpe.Text = ""
+        cboMateriales.SelectedIndex = 0
         btnFiltrar.Enabled = False
         DiseñoAlmacenes(dsfilter)
 
@@ -694,4 +725,35 @@ Public Class FrmBodegas
         End If
 
     End Sub
+
+    Private Sub FrmBodegas_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        LimpiarControles()
+    End Sub
+
+    Private Sub LimpiarControles()
+        flpColumnas.Controls.Clear()
+        flpFilas.Controls.Clear()
+        flpGrupoCeldas.Controls.Clear()
+        cboMateriales.SelectedIndex = 0
+        cboCentroOpe.SelectedIndex = 0
+        cboBodega.SelectedValue = 0
+
+    End Sub
+
+
+
+    'Private Sub IdentificarFormLLamado(sender As Object)
+
+    '    If TypeOf sender Is frmRecepcion Then
+
+    '        frmRecepcion.RecibirUbicacion(posicion.Nombre)
+
+    '    ElseIf TypeOf sender Is frmDevoluciones Then
+
+
+
+    '    End If
+
+    'End Sub
+
 End Class

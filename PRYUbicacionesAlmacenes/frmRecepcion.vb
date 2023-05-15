@@ -10,7 +10,27 @@ Public Class frmRecepcion
     Private ALMACEN As String
     Private ALMRECEPCION As String
     Private ROWID As String = String.Empty
+    Dim utilities As Utilidades = New Utilidades()
 
+
+
+
+    Sub New()
+
+        ' Esta llamada es exigida por el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+        'evita problemas para abrir y cerrar el llamado del formulario  captura de pesos.
+        'If frmBodegasUbicaciones Is Nothing Then
+        '    frmBodegasUbicaciones = New FrmBodegas()
+        'ElseIf Not frmBodegasUbicaciones.IsHandleCreated Then
+        '    frmBodegasUbicaciones = New FrmBodegas()
+        'End If
+
+
+    End Sub
     Private Function CargarDataTable() As DataTable
         Dim conexion As clsConexionNew = New clsConexionNew()
         Dim sql As String = "SELECT  f106_Material, f106_Descripcion FROM t106_Materiales where f106_Descripcion LIKE '%" + txt_Referencia.Text + "%' "
@@ -657,6 +677,43 @@ Public Class frmRecepcion
         End If
 
     End Sub
+
+
+    Private Sub btnBuscarUbicacion_Click(sender As Object, e As EventArgs) Handles btnBuscarUbicacion.Click
+
+        'Dim bln As Boolean = utilities.IsFormOpen("FrmBodegas")
+
+        'If bln Then
+        '    XtraMessageBox.Show("formulario abierto", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        'End If
+
+        Dim frmBodegasUbicaciones As FrmBodegas = New FrmBodegas()
+        frmBodegasUbicaciones.Solicitud_Ubicacion = True
+        frmBodegasUbicaciones.form_solicita = "REC"
+        frmBodegasUbicaciones.ShowDialog(CType(sender, IWin32Window))
+        frmBodegasUbicaciones.Dispose()
+
+
+    End Sub
+
+    Public Sub RecibirUbicacion(ubicacionSelected As String)
+
+        If String.IsNullOrEmpty(txtUbicacion.Text) Then
+            txtUbicacion.Text = ubicacionSelected.Trim()
+
+        Else
+
+            If XtraMessageBox.Show("Ya se encuentra una ubicación de destino seleccionada, ¿Desea cambiarla?", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
+                txtUbicacion.Text = ubicacionSelected.Trim()
+            End If
+        End If
+
+
+
+
+    End Sub
+
+
 
 
 End Class

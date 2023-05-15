@@ -631,5 +631,29 @@ Public Class frmDevoluciones
 
     End Sub
 
+    Private Sub btnBuscarUbicacion_Click(sender As Object, e As EventArgs) Handles btnBuscarUbicacion.Click
+        Dim frmBodegasUbicaciones As FrmBodegas = New FrmBodegas()
+        frmBodegasUbicaciones.Solicitud_Ubicacion = True
+        frmBodegasUbicaciones.form_solicita = "DEV"
+        frmBodegasUbicaciones.ShowDialog()
+        frmBodegasUbicaciones.Dispose()
+    End Sub
+
+    Public Sub RecibirUbicacion(ubicacionSelected As String)
+
+        If String.IsNullOrEmpty(txtUbicacion.Text) Then
+            txtUbicacion.Text = ubicacionSelected.Trim()
+
+        Else
+
+            If XtraMessageBox.Show("Ya se encuentra una ubicación de origen seleccionada, ¿Desea cambiarla?", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
+                txtUbicacion.Text = ubicacionSelected.Trim()
+            End If
+        End If
+
+
+
+
+    End Sub
 
 End Class

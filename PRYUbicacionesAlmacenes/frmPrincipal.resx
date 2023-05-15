@@ -120,6 +120,56 @@
   <metadata name="BarManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>196, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="BarButtonItem3.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAH3RFWHRUaXRsZQBDdWJlO1Nx
+        dWFyZTtFbGVtZW50O0l0ZW07F7BV/QAAANNJREFUOE/N0zEKwjAYBeBCoSB4EsHJqZBBegBXbyAIgquT
+        k/cQXJ2cBG/g6tRV6OQl4nvlDyR/Ei24WPhakvfnkaWFtfYn/csYo41hB0/5ch3M5Aoq2MALrIfrLYwg
+        WVDCCjrwD2rM11Dpgr0MDHXQBTVM4CwDOReYQq0LGF5hJm6y53DtMs7hWFzg8Ba8DW91Aj7R7T4VOEeY
+        yzfKhxT0Q6l9Ykb/U9DA3R8gyYI94FyjC5wFPCBVwH3m/WyuwFlCK1kr62DmWwGVkvE/0ZkU2OINHYTJ
+        KGd46CMAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="BarButtonItem3.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAH3RFWHRUaXRsZQBDdWJlO1Nx
+        dWFyZTtFbGVtZW50O0l0ZW07F7BV/QAAAcdJREFUWEft101HRHEUx/EhInoL0apFq1atLsNso1W0bRUR
+        bVsNvYNWbdu27QXMNiJaRURERLSKiLj9vtf/XPfh3Mdpms0sPqb7/58nMc7cQRzHc5X+EUVRF6tyKi/h
+        k2cvzjXNACtyLO8SZ/DMOfdeXk6fAZbkUF4l27iIe+KI9+okug5wIE/iNazyLOR59VoPsCcP4jVoi3zq
+        5Go3DbAjd+IV7OteqFs7wFBuxCvwV6g/rBpgJLchcFaoP6oaYCLbsiv8y7wCfVGPutSfVA1gwdeyJfvy
+        GM76Ip861KNucm494Q1grmRT+DrxtSre17GvIfnUyd1bT9QNgB+5lA05kjfx4gz3xBFPHvmlOOuJpgHM
+        t1zIupzIh2Tveeace+KIz97nWE+0HcB8ybmsyVhYRnzyzDn3Xl6O9UTXAcynnAmN+eTZi3NZT/QdIDFN
+        nlkMsBhgMUB2gM7rOOS5dxVq17FpvY5DnntXYOs46WE94Q1gGtdxyHPvAlvHudrWE3UDgJ/Xles45JXO
+        xdax+/PceqJpALMspXUc8rKNbR0TX6yRsp5oO4DhzSddxyGPxraOZ/ZmVMS74DjksY6nfzecF/fw/8SD
+        XzDaPhJOw7x3AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <assembly alias="DevExpress.Data.v19.2" name="DevExpress.Data.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <data name="BarButtonItem4.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v19.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjE5LjIsIFZlcnNpb249MTkuMi42
+        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
+        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAAGwDAAAC77u/
+        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgi
+        IHZpZXdCb3g9IjAgMCAzMiAzMiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+        MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3Bh
+        Y2U9InByZXNlcnZlIiBpZD0iTGF5ZXJfMSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAg
+        MzIgMzIiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLlllbGxvd3tmaWxsOiNGRkIxMTU7fQoJ
+        LlJlZHtmaWxsOiNEMTFDMUM7fQoJLkJsYWNre2ZpbGw6IzcyNzI3Mjt9CgkuQmx1ZXtmaWxsOiMxMTc3
+        RDc7fQoJLldoaXRle2ZpbGw6I0ZGRkZGRjt9CgkuR3JlZW57ZmlsbDojMDM5QzIzO30KCS5zdDB7b3Bh
+        Y2l0eTowLjc1O30KCS5zdDF7b3BhY2l0eTowLjU7fQoJLnN0MntvcGFjaXR5OjAuMjU7fQoJLnN0M3tm
+        aWxsOiNGRkIxMTU7fQo8L3N0eWxlPg0KICA8ZyBpZD0iQXV0b0ZpdFRvQ29udGVudHMiPg0KICAgIDxn
+        IGNsYXNzPSJzdDEiPg0KICAgICAgPHBhdGggZD0iTTIyLDE0aDh2NmgtOFYxNHogTTEwLDIwdi02SDJ2
+        NkgxMHogTTIyLDI4aDh2LTZoLThWMjh6IE0xMCwyOHYtNkgydjZIMTB6IiBjbGFzcz0iQmxhY2siIC8+
+        DQogICAgPC9nPg0KICAgIDxwYXRoIGQ9Ik0zMiw4aC00djRsLTUtNWw1LTV2NGg0Vjh6IE00LDJ2NEgw
+        djJoNHY0bDUtNUw0LDJ6IE0xMCwxMmgyVjJoLTJWMTJ6IE0yMCwxMmgyVjJoLTJWMTJ6IiBjbGFzcz0i
+        QmxhY2siIC8+DQogICAgPHBhdGggZD0iTTIwLDIwaC04di02aDhWMjB6IE0yMCwyMmgtOHY2aDhWMjJ6
+        IiBjbGFzcz0iQmx1ZSIgLz4NCiAgPC9nPg0KPC9zdmc+Cw==
+</value>
+  </data>
   <metadata name="XtraTabbedMdiManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>321, 17</value>
   </metadata>

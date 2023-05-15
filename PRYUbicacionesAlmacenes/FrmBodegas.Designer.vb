@@ -22,25 +22,26 @@ Partial Class FrmBodegas
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmBodegas))
         Me.pnlBodega = New System.Windows.Forms.Panel()
         Me.tablaContenedora = New System.Windows.Forms.TableLayoutPanel()
         Me.flpFilas = New System.Windows.Forms.FlowLayoutPanel()
-        Me.flpGrupoCeldas = New System.Windows.Forms.FlowLayoutPanel()
-        Me.flpColumnas = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.chkRestablece = New System.Windows.Forms.CheckBox()
         Me.btnRestablecer = New System.Windows.Forms.Button()
         Me.txtMaterial = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cboMateriales = New System.Windows.Forms.ComboBox()
-        Me.txtBodega = New System.Windows.Forms.TextBox()
         Me.txtCentroOpe = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.cboBodega = New System.Windows.Forms.ComboBox()
         Me.cboCentroOpe = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnFiltrar = New System.Windows.Forms.Button()
+        Me.txtBodega = New System.Windows.Forms.TextBox()
+        Me.cboBodega = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.flpColumnas = New System.Windows.Forms.FlowLayoutPanel()
+        Me.flpGrupoCeldas = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlBodega.SuspendLayout()
         Me.tablaContenedora.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -63,9 +64,9 @@ Partial Class FrmBodegas
         Me.tablaContenedora.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.tablaContenedora.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tablaContenedora.Controls.Add(Me.flpFilas, 0, 2)
-        Me.tablaContenedora.Controls.Add(Me.flpGrupoCeldas, 1, 2)
-        Me.tablaContenedora.Controls.Add(Me.flpColumnas, 1, 1)
         Me.tablaContenedora.Controls.Add(Me.Panel1, 1, 0)
+        Me.tablaContenedora.Controls.Add(Me.flpColumnas, 1, 1)
+        Me.tablaContenedora.Controls.Add(Me.flpGrupoCeldas, 1, 2)
         Me.tablaContenedora.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tablaContenedora.Location = New System.Drawing.Point(0, 0)
         Me.tablaContenedora.Name = "tablaContenedora"
@@ -83,26 +84,9 @@ Partial Class FrmBodegas
         Me.flpFilas.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.flpFilas.Location = New System.Drawing.Point(3, 168)
         Me.flpFilas.Name = "flpFilas"
-        Me.flpFilas.Size = New System.Drawing.Size(34, 713)
+        Me.flpFilas.Size = New System.Drawing.Size(34, 664)
         Me.flpFilas.TabIndex = 1
         Me.flpFilas.WrapContents = False
-        '
-        'flpGrupoCeldas
-        '
-        Me.flpGrupoCeldas.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.flpGrupoCeldas.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.flpGrupoCeldas.Location = New System.Drawing.Point(43, 168)
-        Me.flpGrupoCeldas.Name = "flpGrupoCeldas"
-        Me.flpGrupoCeldas.Size = New System.Drawing.Size(1710, 713)
-        Me.flpGrupoCeldas.TabIndex = 2
-        '
-        'flpColumnas
-        '
-        Me.flpColumnas.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.flpColumnas.Location = New System.Drawing.Point(43, 118)
-        Me.flpColumnas.Name = "flpColumnas"
-        Me.flpColumnas.Size = New System.Drawing.Size(1710, 44)
-        Me.flpColumnas.TabIndex = 0
         '
         'Panel1
         '
@@ -126,7 +110,7 @@ Partial Class FrmBodegas
         '
         Me.chkRestablece.AutoSize = True
         Me.chkRestablece.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkRestablece.Location = New System.Drawing.Point(1351, 58)
+        Me.chkRestablece.Location = New System.Drawing.Point(1455, 58)
         Me.chkRestablece.Name = "chkRestablece"
         Me.chkRestablece.Size = New System.Drawing.Size(145, 17)
         Me.chkRestablece.TabIndex = 12
@@ -143,7 +127,7 @@ Partial Class FrmBodegas
         Me.btnRestablecer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnRestablecer.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnRestablecer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRestablecer.Location = New System.Drawing.Point(1390, 78)
+        Me.btnRestablecer.Location = New System.Drawing.Point(1494, 78)
         Me.btnRestablecer.Name = "btnRestablecer"
         Me.btnRestablecer.Size = New System.Drawing.Size(106, 28)
         Me.btnRestablecer.TabIndex = 11
@@ -177,38 +161,12 @@ Partial Class FrmBodegas
         Me.cboMateriales.Size = New System.Drawing.Size(433, 21)
         Me.cboMateriales.TabIndex = 6
         '
-        'txtBodega
-        '
-        Me.txtBodega.Location = New System.Drawing.Point(962, 16)
-        Me.txtBodega.Name = "txtBodega"
-        Me.txtBodega.Size = New System.Drawing.Size(378, 20)
-        Me.txtBodega.TabIndex = 5
-        '
         'txtCentroOpe
         '
         Me.txtCentroOpe.Location = New System.Drawing.Point(261, 24)
         Me.txtCentroOpe.Name = "txtCentroOpe"
         Me.txtCentroOpe.Size = New System.Drawing.Size(308, 20)
         Me.txtCentroOpe.TabIndex = 4
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Lavender
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(707, 18)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(66, 15)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Almacén:"
-        '
-        'cboBodega
-        '
-        Me.cboBodega.FormattingEnabled = True
-        Me.cboBodega.Location = New System.Drawing.Point(779, 15)
-        Me.cboBodega.Name = "cboBodega"
-        Me.cboBodega.Size = New System.Drawing.Size(163, 21)
-        Me.cboBodega.TabIndex = 2
         '
         'cboCentroOpe
         '
@@ -240,7 +198,7 @@ Partial Class FrmBodegas
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1499, 49)
+        Me.GroupBox1.Size = New System.Drawing.Size(1605, 49)
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
         '
@@ -253,12 +211,57 @@ Partial Class FrmBodegas
         Me.btnFiltrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnFiltrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFiltrar.Location = New System.Drawing.Point(1386, 9)
+        Me.btnFiltrar.Location = New System.Drawing.Point(1490, 9)
         Me.btnFiltrar.Name = "btnFiltrar"
         Me.btnFiltrar.Size = New System.Drawing.Size(107, 34)
         Me.btnFiltrar.TabIndex = 9
         Me.btnFiltrar.Text = "Filtrar"
         Me.btnFiltrar.UseVisualStyleBackColor = False
+        '
+        'txtBodega
+        '
+        Me.txtBodega.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBodega.Location = New System.Drawing.Point(1042, 16)
+        Me.txtBodega.Name = "txtBodega"
+        Me.txtBodega.Size = New System.Drawing.Size(378, 20)
+        Me.txtBodega.TabIndex = 5
+        '
+        'cboBodega
+        '
+        Me.cboBodega.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboBodega.FormattingEnabled = True
+        Me.cboBodega.Location = New System.Drawing.Point(859, 15)
+        Me.cboBodega.Name = "cboBodega"
+        Me.cboBodega.Size = New System.Drawing.Size(163, 21)
+        Me.cboBodega.TabIndex = 2
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Lavender
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(787, 18)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(66, 15)
+        Me.Label2.TabIndex = 3
+        Me.Label2.Text = "Almacén:"
+        '
+        'flpColumnas
+        '
+        Me.flpColumnas.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flpColumnas.Location = New System.Drawing.Point(43, 118)
+        Me.flpColumnas.Name = "flpColumnas"
+        Me.flpColumnas.Size = New System.Drawing.Size(1710, 44)
+        Me.flpColumnas.TabIndex = 0
+        '
+        'flpGrupoCeldas
+        '
+        Me.flpGrupoCeldas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.flpGrupoCeldas.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.flpGrupoCeldas.Location = New System.Drawing.Point(43, 168)
+        Me.flpGrupoCeldas.Name = "flpGrupoCeldas"
+        Me.flpGrupoCeldas.Size = New System.Drawing.Size(1708, 664)
+        Me.flpGrupoCeldas.TabIndex = 2
         '
         'FrmBodegas
         '
@@ -267,6 +270,7 @@ Partial Class FrmBodegas
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(1754, 835)
         Me.Controls.Add(Me.pnlBodega)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmBodegas"
         Me.Text = "Mapa de Ubicaciones"
         Me.pnlBodega.ResumeLayout(False)

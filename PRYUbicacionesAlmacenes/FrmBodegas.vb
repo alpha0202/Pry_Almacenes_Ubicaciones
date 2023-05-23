@@ -312,8 +312,8 @@ Public Class FrmBodegas
             LimpiarControles()
             DiseñoAlmacenes(ds)
             txtCentroOpe.Text = ""
-            cboCentroOpe.SelectedIndex = 0
-            cboBodega.SelectedValue = 0
+            'cboCentroOpe.SelectedIndex = 0
+            'cboBodega.SelectedValue = 0
 
 
         End If
@@ -631,38 +631,52 @@ Public Class FrmBodegas
                 Dim celda As Celdas = CType(GetCelda(celdas, nombreCol, j + 1), Celdas)
                 If celda IsNot Nothing Then
                     'Agregar los botones
+                    Dim po As Posiciones = celda.Posiciones.FirstOrDefault
+
+
+                    Dim iteradorCantidadPosiciones As Integer = po.Orden
+                    If iteradorCantidadPosiciones > celda.CantidadPosiciones Then
+
+                        celda.CantidadPosiciones = iteradorCantidadPosiciones
+
+                    End If
+
+
+
+
                     For k = 0 To celda.CantidadPosiciones - 1
 
-                        Dim posicion As Posiciones = celda.Posiciones.Find(Function(p) p.Orden = k + 1)
-                        If posicion IsNot Nothing Then
-                            'Se pinta el botón
-                            Dim btn As New Button With {
+                            Dim itera As Integer = k
+                            Dim posicion As Posiciones = celda.Posiciones.Find(Function(p) p.Orden = itera + 1)
+                            If posicion IsNot Nothing Then
+                                'Se pinta el botón
+                                Dim btn As New Button With {
                                 .Text = posicion.Nombre,
                                 .Height = flpCell.Height - 5,
                                 .Width = IIf(celda.CantidadPosiciones > 1, (flpCell.Width / celda.CantidadPosiciones) - 10, (flpCell.Width / celda.CantidadPosiciones) - 30),
                                 .TextAlign = ContentAlignment.MiddleCenter,
                                 .BackColor = IIf(ExisteMaterial(posicion), Color.FromArgb(110, 155, 235), Color.FromArgb(200, 216, 228))
                             }
-                            flpCell.Controls.Add(btn)
-                            SetClickBotonPosicion(btn, Sub(sender, args)
-                                                           'ClickBotonPosicion(posicion)
-                                                           MostrarMaterial(sender, args, posicion)
-                                                       End Sub)
+                                flpCell.Controls.Add(btn)
+                                SetClickBotonPosicion(btn, Sub(sender, args)
+                                                               'ClickBotonPosicion(posicion)
+                                                               MostrarMaterial(sender, args, posicion)
+                                                           End Sub)
 
-                        Else
-                            'Se deja el espacio
-                            Dim label As New Label With {
+                            Else
+                                'Se deja el espacio
+                                Dim label As New Label With {
                                 .Text = "",
                                 .BackColor = Color.Transparent,
                                 .Height = flpCell.Height - 5,
                                 .Width = (flpCell.Width / celda.CantidadPosiciones) - 30
                             }
 
-                            flpCell.Controls.Add(label)
-                        End If
+                                flpCell.Controls.Add(label)
+                            End If
 
-                    Next
-                End If
+                        Next
+                    End If
             Next
 
         Next
@@ -734,7 +748,7 @@ Public Class FrmBodegas
         flpColumnas.Controls.Clear()
         flpFilas.Controls.Clear()
         flpGrupoCeldas.Controls.Clear()
-        cboMateriales.SelectedIndex = 0
+        'cboMateriales.SelectedIndex = 0
         cboCentroOpe.SelectedIndex = 0
         cboBodega.SelectedValue = 0
 

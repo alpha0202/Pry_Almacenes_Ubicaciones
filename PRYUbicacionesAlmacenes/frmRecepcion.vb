@@ -120,7 +120,7 @@ Public Class frmRecepcion
                 Dim lstToObject As Dictionary(Of Object, Object) = LotesCombo.ToDictionary(Function(k) DirectCast(k.Key, Object), Function(v) DirectCast(v.Value, Object))
                 Utilidades.CargarCombo(cboLote, lstToObject, True, "--Seleccionar Uno--")
 
-                '****fin de llenado*****
+                '****fin de llenado combo lotes*****
 
 
                 'For Each drCombo As DataRow In dtLotes.Rows
@@ -314,10 +314,6 @@ Public Class frmRecepcion
             XtraMessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-
-
-
 
 
     Private Sub txtCantidadMovimiento_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCantidadMovimiento.KeyPress
@@ -599,14 +595,14 @@ Public Class frmRecepcion
                 Dim cantidad As Double = CDbl(dr("LABST").ToString())
                 Dim unidad As String = dr("MEINS").ToString()
                 Dim lote As String = dr("CHARG").ToString()
-                Dim serial As String = drSeriales("SERNR").ToString()
+                Dim serial As String = dr("SERNR").ToString()
 
 
                 '***verificar si maneja serial el material. De ser así, se procede como se hace con los demás materiales.
                 If Not String.IsNullOrEmpty(serial) Then
                     Dim equal As Boolean
                     serialDigitado = txt_RecepSerial.Text
-                    serialDigitado = String.Concat("0000000000", serialDigitado)
+                    'serialDigitado = String.Concat("0000000000", serialDigitado)
 
                     If serialDigitado = "" Then
                         XtraMessageBox.Show("Nota: " + "Debe digitar el serial del material", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -614,7 +610,7 @@ Public Class frmRecepcion
                     End If
 
 
-                    equal = serial.Trim().Equals(serialDigitado.Trim())
+                    equal = serial.Trim().Equals(String.Concat("0000000000", serialDigitado).Trim())
 
                     If equal = True Then
 

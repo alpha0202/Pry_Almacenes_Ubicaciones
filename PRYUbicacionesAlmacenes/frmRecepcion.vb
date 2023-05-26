@@ -675,22 +675,6 @@ Public Class frmRecepcion
     End Sub
 
 
-    Private Sub btnBuscarUbicacion_Click(sender As Object, e As EventArgs) Handles btnBuscarUbicacion.Click
-
-        'Dim bln As Boolean = utilities.IsFormOpen("FrmBodegas")
-
-        'If bln Then
-        '    XtraMessageBox.Show("formulario abierto", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        'End If
-
-        Dim frmBodegasUbicaciones As FrmBodegas = New FrmBodegas()
-        frmBodegasUbicaciones.Solicitud_Ubicacion = True
-        frmBodegasUbicaciones.form_solicita = "REC"
-        frmBodegasUbicaciones.ShowDialog(CType(sender, IWin32Window))
-        frmBodegasUbicaciones.Dispose()
-
-
-    End Sub
 
     Public Sub RecibirUbicacion(ubicacionSelected As String)
 

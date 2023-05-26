@@ -350,6 +350,11 @@ Public Class FrmBodegas
 
                     frmDevoluciones.RecibirUbicacion(posicion.Nombre)
 
+                ElseIf form_solicita = "TRU" Then
+
+                    frmTrasladosMateriales_Ubicacion.RecibirUbicacion(posicion.Nombre)
+
+
                 End If
 
                 XtraMessageBox.Show("Ubicación Seleccionada", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)

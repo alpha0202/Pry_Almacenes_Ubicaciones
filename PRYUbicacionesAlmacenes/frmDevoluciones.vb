@@ -309,7 +309,7 @@ Public Class frmDevoluciones
                 If txt_SerialDevolucion.Text = "" Then
                     XtraMessageBox.Show("El MATERIAL EXIGE DIGITAR EL SERIAL PARA CONSULTAR EL SALDO DENTRO DEL LOTE.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Else
-
+                    txt_SerialDevolucion.Text = String.Concat("0000000000", txt_SerialDevolucion.Text.Trim())
                     ConsultarSaldo_bySerial(ALMACEN, txtUbicacion.Text, txt_SerialDevolucion.Text)
                 End If
 

@@ -100,7 +100,14 @@ Public Class Utilidades
     End Function
 
 
+    Public Shared Function BuscarUbicacion()
+        Dim frmBodegasUbicaciones As FrmBodegas = New FrmBodegas()
+        frmBodegasUbicaciones.Solicitud_Ubicacion = True
+        frmBodegasUbicaciones.form_solicita = "TRU"
+        frmBodegasUbicaciones.ShowDialog()
+        frmBodegasUbicaciones.Dispose()
 
+    End Function
 
 
 

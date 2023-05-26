@@ -101,4 +101,12 @@ Partial Public Class frmPrincipal
     Private Sub BarButtonItem4_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem4.ItemClick
         AbrirFormulario("Mapa de Bodegas", FrmBodegas)
     End Sub
+
+    Private Sub BarButtonTraslados_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonTraslados.ItemClick
+        AbrirFormulario("Traslado por Ubicaciones", frmTrasladosMateriales_Ubicacion)
+    End Sub
+
+    Private Sub BarButtonTrasladoAlmacenes_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonTrasladoAlmacenes.ItemClick
+        AbrirFormulario("Traslado Almacenes Diferentes", frmTrasladoAlmacenesDiferentes)
+    End Sub
 End Class

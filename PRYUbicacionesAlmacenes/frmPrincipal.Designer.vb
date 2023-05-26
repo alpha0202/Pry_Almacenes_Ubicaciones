@@ -33,12 +33,16 @@
         Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem()
         Me.BarButtonItem3 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonItem4 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarSubItem2 = New DevExpress.XtraBars.BarSubItem()
+        Me.BarButtonTraslados = New DevExpress.XtraBars.BarButtonItem()
         Me.Bar3 = New DevExpress.XtraBars.Bar()
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
+        Me.BarButtonItem5 = New DevExpress.XtraBars.BarButtonItem()
         Me.XtraTabbedMdiManager1 = New DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(Me.components)
+        Me.BarButtonTrasladoAlmacenes = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -51,8 +55,8 @@
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarButtonItem1, Me.BarButtonItem2, Me.BarSubItem1, Me.BarButtonItem3, Me.BarButtonItem4})
-        Me.BarManager1.MaxItemId = 5
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarButtonItem1, Me.BarButtonItem2, Me.BarSubItem1, Me.BarButtonItem3, Me.BarButtonItem4, Me.BarButtonItem5, Me.BarSubItem2, Me.BarButtonTraslados, Me.BarButtonTrasladoAlmacenes})
+        Me.BarManager1.MaxItemId = 9
         Me.BarManager1.StatusBar = Me.Bar3
         '
         'Bar1
@@ -61,7 +65,7 @@
         Me.Bar1.DockCol = 0
         Me.Bar1.DockRow = 0
         Me.Bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
-        Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem1), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem2), New DevExpress.XtraBars.LinkPersistInfo(Me.BarSubItem1)})
+        Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem1), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem2), New DevExpress.XtraBars.LinkPersistInfo(Me.BarSubItem1), New DevExpress.XtraBars.LinkPersistInfo(Me.BarSubItem2)})
         Me.Bar1.Text = "Herramientas"
         '
         'BarButtonItem1
@@ -97,6 +101,20 @@
         Me.BarButtonItem4.Id = 4
         Me.BarButtonItem4.ImageOptions.SvgImage = CType(resources.GetObject("BarButtonItem4.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.BarButtonItem4.Name = "BarButtonItem4"
+        '
+        'BarSubItem2
+        '
+        Me.BarSubItem2.Caption = "Traslados"
+        Me.BarSubItem2.Id = 6
+        Me.BarSubItem2.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonTraslados), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonTrasladoAlmacenes)})
+        Me.BarSubItem2.Name = "BarSubItem2"
+        '
+        'BarButtonTraslados
+        '
+        Me.BarButtonTraslados.Caption = "Por Ubicación"
+        Me.BarButtonTraslados.Id = 7
+        Me.BarButtonTraslados.ImageOptions.SvgImage = CType(resources.GetObject("BarButtonTraslados.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.BarButtonTraslados.Name = "BarButtonTraslados"
         '
         'Bar3
         '
@@ -146,9 +164,22 @@
         Me.barDockControlRight.Margin = New System.Windows.Forms.Padding(2)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 345)
         '
+        'BarButtonItem5
+        '
+        Me.BarButtonItem5.Caption = "Traslados"
+        Me.BarButtonItem5.Id = 5
+        Me.BarButtonItem5.Name = "BarButtonItem5"
+        '
         'XtraTabbedMdiManager1
         '
         Me.XtraTabbedMdiManager1.MdiParent = Me
+        '
+        'BarButtonTrasladoAlmacenes
+        '
+        Me.BarButtonTrasladoAlmacenes.Caption = "A Almacenes diferentes"
+        Me.BarButtonTrasladoAlmacenes.Id = 8
+        Me.BarButtonTrasladoAlmacenes.ImageOptions.SvgImage = CType(resources.GetObject("BarButtonItem6.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.BarButtonTrasladoAlmacenes.Name = "BarButtonTrasladoAlmacenes"
         '
         'frmPrincipal
         '
@@ -183,6 +214,10 @@
     Friend WithEvents BarSubItem1 As DevExpress.XtraBars.BarSubItem
     Friend WithEvents BarButtonItem3 As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents BarButtonItem4 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonItem5 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarSubItem2 As DevExpress.XtraBars.BarSubItem
+    Friend WithEvents BarButtonTraslados As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonTrasladoAlmacenes As DevExpress.XtraBars.BarButtonItem
 
 #End Region
 

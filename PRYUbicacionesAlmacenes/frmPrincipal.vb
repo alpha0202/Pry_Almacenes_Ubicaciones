@@ -44,6 +44,12 @@ Partial Public Class frmPrincipal
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        'versión ensamblador del aplicativo
+        Dim version = My.Application.Info.Version.ToString()
+        BarHeaderItem2.Caption = version
+
+
+
         Try
             SplashScreenManager.ShowForm(Me, GetType(WaitForm1), True, True, False)
             Dim user As New Usuarios()

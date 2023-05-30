@@ -304,57 +304,74 @@ Public Class frmTrasladosMateriales_Ubicacion
     Private Sub ConsultarSaldo_bySerial(ubicacion As Object, getSerial As Object)
         'Dim serial_dvp As String
         ' Dim sql2 As String
-        If cboLote.SelectedValue.ToString() <> "" And cboLote.SelectedValue.ToString() <> "0" Then
-            Dim loteSelect As String = cboLote.SelectedValue.ToString()
-            Dim material = cboMateriales.SelectedValue.ToString()
 
-            Dim sql As String = "select f302_Cantidad - f302_CantMvtos from t302_Saldos
+        Try
+            If cboLote.SelectedValue.ToString() <> "" And cboLote.SelectedValue.ToString() <> "0" Then
+                Dim loteSelect As String = cboLote.SelectedValue.ToString()
+                Dim material = cboMateriales.SelectedValue.ToString()
+
+                If getSerial Is String.Empty Then
+                    Throw New ArgumentException("Debe digitar el serial para realizar consulta.")
+                End If
+
+                SplashScreenManager.ShowForm(Me, GetType(WaitForm1), True, True, False)
+
+                Dim sql As String = "select f302_Cantidad - f302_CantMvtos from t302_Saldos
                  where f302_Ubicacion = '" + ubicacion.ToString() + "' and f302_Material = '" + material + "' and f302_SerialMaterial = '" + getSerial.ToString() + "' and f302_Cantidad - f302_CantMvtos > 0"
 
 
-            Dim conexion As clsConexionNew = New clsConexionNew()
+                Dim conexion As clsConexionNew = New clsConexionNew()
 
-            If loteSelect <> "" And loteSelect <> "0" Then
-                'agregar a la consulta, el lote seleccionado
-                sql = sql + " and f302_Lote = '" + loteSelect + "'"
+                If loteSelect <> "" And loteSelect <> "0" Then
+                    'agregar a la consulta, el lote seleccionado
+                    sql = sql + " and f302_Lote = '" + loteSelect + "'"
 
-            Else
-                loteSelect = ""
+                Else
+                    loteSelect = ""
+                End If
+
+
+                Dim respuesta As String
+                Dim cantidad As Double = 0
+                Try
+                    respuesta = conexion.GetEscalar(sql).ToString()
+
+
+                Catch ex As Exception
+                    respuesta = "0"
+                    'XtraMessageBox.Show("SERIAL SIN SALDO O NO ENCONTRADO.", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Throw New ArgumentException("SERIAL SIN SALDO O NO ENCONTRADO.")
+
+                End Try
+
+
+                If IsNumeric(respuesta) Then
+                    cantidad = CDec(respuesta)
+                End If
+
+                If loteSelect <> "0" Then
+
+
+                    txtCantidadDisponible.Text = cantidad.ToString()
+                    txtCantidadMovimiento.Text = cantidad.ToString()
+                    txtCantidadMovimiento.Select()
+                    'txt_SerialDevolucion.Select()
+                    'cboLote.SelectedIndex = 0
+
+                Else
+                    txtCantidadDisponible.Text = String.Empty
+                    txtCantidadMovimiento.Text = String.Empty
+                    txt_SerialMaterial.Text = String.Empty
+                End If
+
+                SplashScreenManager.CloseForm(False)
             End If
 
+        Catch ex As Exception
+            SplashScreenManager.CloseForm(False)
+            XtraMessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
 
-            Dim respuesta As String
-            Dim cantidad As Double = 0
-            Try
-                respuesta = conexion.GetEscalar(sql).ToString()
-
-
-            Catch ex As Exception
-                respuesta = "0"
-                XtraMessageBox.Show("SERIAL SIN SALDO O NO ENCONTRADO.", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-            End Try
-
-
-            If IsNumeric(respuesta) Then
-                cantidad = CDec(respuesta)
-            End If
-
-            If loteSelect <> "0" Then
-
-
-                txtCantidadDisponible.Text = cantidad.ToString()
-                txtCantidadMovimiento.Text = cantidad.ToString()
-                txtCantidadMovimiento.Select()
-                'txt_SerialDevolucion.Select()
-                'cboLote.SelectedIndex = 0
-
-            Else
-                txtCantidadDisponible.Text = String.Empty
-                txtCantidadMovimiento.Text = String.Empty
-                txt_SerialMaterial.Text = String.Empty
-            End If
-        End If
 
 
     End Sub
@@ -595,6 +612,8 @@ Public Class frmTrasladosMateriales_Ubicacion
     Private Sub btnBuscarUbiOrigen_Click(sender As Object, e As EventArgs) Handles btnBuscarUbiOrigen.Click
         ubicacionOrigen = True
         Utilidades.BuscarUbicacion("TRU")
+        Utilidades.ExisteUbicacionSeleccionada(txtUbicacionOrigen.Text.Trim())
+
     End Sub
 
 
@@ -663,6 +682,15 @@ Public Class frmTrasladosMateriales_Ubicacion
     Private Sub btnEliminarMovimientos_Click(sender As Object, e As EventArgs) Handles btnEliminarMovimientos.Click
         EliminarMovimiento()
     End Sub
+
+    'Private Sub txtUbicacionOrigen_Leave(sender As Object, e As EventArgs) Handles txtUbicacionOrigen.Leave
+    '    If String.IsNullOrEmpty(txtUbicacionOrigen.Text) Then
+    '        XtraMessageBox.Show("El campo está vacío.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+    '        txtUbicacionOrigen.Select()
+    '    Else
+    '        Utilidades.ExisteUbicacionSeleccionada(txtUbicacionOrigen.Text.Trim())
+    '    End If
+    'End Sub
 
     'Private Sub txtUbicacionOrigen_Leave(sender As Object, e As EventArgs)
     '    CargarMaterialesUbicacion(txtUbicacionOrigen.Text)

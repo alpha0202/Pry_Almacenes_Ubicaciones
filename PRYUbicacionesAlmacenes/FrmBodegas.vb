@@ -326,6 +326,7 @@ Public Class FrmBodegas
             'SplashScreenManager.ShowForm(Me, GetType(WaitForm1), True, True, False)
             Dim ubicacionName = posicion.Nombre
             Dim ubicacionDesc = posicion.Descripcion
+            Dim form_Solicitante As String = ""
 
             If Not Solicitud_Ubicacion Then
                 Dim conexion As New clsConexionNew()
@@ -341,27 +342,27 @@ Public Class FrmBodegas
                 f.Dispose()
 
             Else
-
+                'seleccionar la ubicación según el tipo de solicitud ( form, origen, destino)
                 If form_solicita = "REC" Then
-
+                    form_Solicitante = "Recepción"
                     frmRecepcion.RecibirUbicacion(posicion.Nombre)
 
                 ElseIf form_solicita = "DEV" Then
-
+                    form_Solicitante = "Devolución"
                     frmDevoluciones.RecibirUbicacion(posicion.Nombre)
 
                 ElseIf form_solicita = "TRU" Then
-
+                    form_Solicitante = "Traslado Ubicación"
                     frmTrasladosMateriales_Ubicacion.RecibirUbicacion(posicion.Nombre)
 
                 ElseIf form_solicita = "TRA" Then
-
+                    form_Solicitante = "Traslado Ubicación, otro almacen."
                     frmTrasladoAlmacenesDiferentes.RecibirUbicacion(posicion.Nombre)
 
 
                 End If
 
-                XtraMessageBox.Show($"Ubicación Seleccionada {posicion.Nombre}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                XtraMessageBox.Show($"Ubicación Seleccionada {posicion.Nombre}, solicitado por {form_Solicitante}.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.Close()
 
             End If
@@ -760,19 +761,5 @@ Public Class FrmBodegas
     End Sub
 
 
-
-    'Private Sub IdentificarFormLLamado(sender As Object)
-
-    '    If TypeOf sender Is frmRecepcion Then
-
-    '        frmRecepcion.RecibirUbicacion(posicion.Nombre)
-
-    '    ElseIf TypeOf sender Is frmDevoluciones Then
-
-
-
-    '    End If
-
-    'End Sub
 
 End Class

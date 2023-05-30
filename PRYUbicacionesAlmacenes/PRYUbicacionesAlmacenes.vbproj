@@ -40,6 +40,9 @@
   <PropertyGroup>
     <StartupObject>PRYUbicacionesAlmacenes.My.MyApplication</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\ico_ubicaciones.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v19.2" />
     <Reference Include="DevExpress.Data.v19.2" />

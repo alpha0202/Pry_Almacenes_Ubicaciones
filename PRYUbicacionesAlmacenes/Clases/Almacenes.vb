@@ -64,7 +64,7 @@
 
         Dim dt As New DataTable()
         LstParametros.Add(New Parametros("@almacen", almRecepcion, SqlDbType.VarChar))
-        dt = conexion.SPObtenerDataTable("SP_GetAlamacen", LstParametros)
+        dt = conexion.SPObtenerDataTable("SP_GetAlmacen", LstParametros)
 
         If dt.Rows.Count = 0 Then
             Throw New ArgumentException("almacen recepcion no encontrado")

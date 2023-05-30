@@ -1,4 +1,5 @@
 ﻿Imports System.Windows
+Imports DevExpress.XtraEditors
 Imports SAP.Middleware.Connector
 
 Public Class Utilidades
@@ -99,6 +100,20 @@ Public Class Utilidades
 
     End Function
 
+    'Private Sub IdentificarFormLLamado(sender As Object)
+
+    '    If TypeOf sender Is frmRecepcion Then
+
+    '        frmRecepcion.RecibirUbicacion(posicion.Nombre)
+
+    '    ElseIf TypeOf sender Is frmDevoluciones Then
+
+
+
+    '    End If
+
+    'End Sub
+
 
     Public Shared Function BuscarUbicacion(ByVal tipoTraslado As String)
 
@@ -111,6 +126,30 @@ Public Class Utilidades
 
     End Function
 
+
+    Public Shared Function ExisteUbicacionSeleccionada(ubicacion As String) As String
+        Dim respuesta As String
+
+        Try
+
+            Dim conexion As clsConexionNew = New clsConexionNew()
+            Dim LstParametros As New List(Of Parametros)()
+
+            LstParametros.Add(New Parametros("@ubicacion", ubicacion, SqlDbType.VarChar))
+
+            Dim dt As New DataTable
+            Dim res As DataRow
+            dt = conexion.SPObtenerDataTable("SP_GetUbicacion", LstParametros)
+            res = dt.Rows(0)
+            respuesta = res("RESPUESTA").ToString()
+
+
+        Catch ex As Exception
+            'Return "0"
+            XtraMessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        Return respuesta
+    End Function
 
 
 End Class

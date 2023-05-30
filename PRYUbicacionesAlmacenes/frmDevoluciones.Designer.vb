@@ -124,34 +124,37 @@ Partial Class frmDevoluciones
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(204, 157)
+        Me.btnCerrar.ImageOptions.SvgImage = CType(resources.GetObject("btnCerrar.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btnCerrar.Location = New System.Drawing.Point(257, 157)
         Me.btnCerrar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(100, 23)
+        Me.btnCerrar.Size = New System.Drawing.Size(141, 43)
         Me.btnCerrar.TabIndex = 66
         Me.btnCerrar.Text = "Cerrar Documento"
         '
         'btnEditar
         '
-        Me.btnEditar.Location = New System.Drawing.Point(107, 157)
+        Me.btnEditar.ImageOptions.SvgImage = CType(resources.GetObject("btnEditar.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btnEditar.Location = New System.Drawing.Point(135, 157)
         Me.btnEditar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnEditar.Name = "btnEditar"
-        Me.btnEditar.Size = New System.Drawing.Size(75, 23)
+        Me.btnEditar.Size = New System.Drawing.Size(107, 43)
         Me.btnEditar.TabIndex = 65
         Me.btnEditar.Text = "Editar"
         '
         'btnNuevo
         '
+        Me.btnNuevo.ImageOptions.SvgImage = CType(resources.GetObject("btnNuevo.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btnNuevo.Location = New System.Drawing.Point(10, 157)
         Me.btnNuevo.Margin = New System.Windows.Forms.Padding(2)
         Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(75, 23)
+        Me.btnNuevo.Size = New System.Drawing.Size(111, 43)
         Me.btnNuevo.TabIndex = 64
         Me.btnNuevo.Text = "Nuevo"
         '
         'txtEstado
         '
-        Me.txtEstado.Location = New System.Drawing.Point(325, 97)
+        Me.txtEstado.Location = New System.Drawing.Point(351, 97)
         Me.txtEstado.Margin = New System.Windows.Forms.Padding(2)
         Me.txtEstado.Name = "txtEstado"
         Me.txtEstado.Properties.ReadOnly = True
@@ -162,7 +165,7 @@ Partial Class frmDevoluciones
         '
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.LabelControl6.Appearance.Options.UseFont = True
-        Me.LabelControl6.Location = New System.Drawing.Point(276, 100)
+        Me.LabelControl6.Location = New System.Drawing.Point(302, 100)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(43, 16)
         Me.LabelControl6.TabIndex = 62
@@ -170,7 +173,7 @@ Partial Class frmDevoluciones
         '
         'txtNroDocto
         '
-        Me.txtNroDocto.Location = New System.Drawing.Point(213, 97)
+        Me.txtNroDocto.Location = New System.Drawing.Point(219, 97)
         Me.txtNroDocto.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNroDocto.Name = "txtNroDocto"
         Me.txtNroDocto.Properties.ReadOnly = True
@@ -181,7 +184,7 @@ Partial Class frmDevoluciones
         '
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.LabelControl5.Appearance.Options.UseFont = True
-        Me.LabelControl5.Location = New System.Drawing.Point(144, 100)
+        Me.LabelControl5.Location = New System.Drawing.Point(150, 100)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(61, 16)
         Me.LabelControl5.TabIndex = 60
@@ -382,10 +385,11 @@ Partial Class frmDevoluciones
         '
         'btnGuardar
         '
+        Me.btnGuardar.ImageOptions.Image = CType(resources.GetObject("btnGuardar.ImageOptions.Image"), System.Drawing.Image)
         Me.btnGuardar.Location = New System.Drawing.Point(17, 250)
         Me.btnGuardar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(130, 23)
+        Me.btnGuardar.Size = New System.Drawing.Size(146, 47)
         Me.btnGuardar.TabIndex = 76
         Me.btnGuardar.Text = "Guardar Movimiento"
         '
@@ -557,10 +561,10 @@ Partial Class frmDevoluciones
         '
         'btnEliminarMovimientos
         '
-        Me.btnEliminarMovimientos.ImageOptions.Image = CType(resources.GetObject("btnEliminarMovimientos.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnEliminarMovimientos.ImageOptions.SvgImage = CType(resources.GetObject("btnEliminarMovimientos.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btnEliminarMovimientos.Location = New System.Drawing.Point(8, 298)
         Me.btnEliminarMovimientos.Name = "btnEliminarMovimientos"
-        Me.btnEliminarMovimientos.Size = New System.Drawing.Size(133, 23)
+        Me.btnEliminarMovimientos.Size = New System.Drawing.Size(158, 46)
         Me.btnEliminarMovimientos.TabIndex = 184
         Me.btnEliminarMovimientos.Text = "Eliminar Movimientos"
         '
@@ -570,9 +574,10 @@ Partial Class frmDevoluciones
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1204, 659)
         Me.Controls.Add(Me.XtraTabControl1)
+        Me.IconOptions.LargeImage = CType(resources.GetObject("frmDevoluciones.IconOptions.LargeImage"), System.Drawing.Image)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "frmDevoluciones"
-        Me.Text = "frmDevoluciones"
+        Me.Text = "Devoluciones"
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabControl1.ResumeLayout(False)
         Me.XtraTabPage1.ResumeLayout(False)

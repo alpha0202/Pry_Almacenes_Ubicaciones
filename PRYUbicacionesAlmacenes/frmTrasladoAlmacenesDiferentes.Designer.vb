@@ -148,28 +148,31 @@ Partial Class frmTrasladoAlmacenesDiferentes
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(229, 294)
+        Me.btnCerrar.ImageOptions.SvgImage = CType(resources.GetObject("btnCerrar.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btnCerrar.Location = New System.Drawing.Point(229, 287)
         Me.btnCerrar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(100, 23)
+        Me.btnCerrar.Size = New System.Drawing.Size(137, 42)
         Me.btnCerrar.TabIndex = 88
         Me.btnCerrar.Text = "Cerrar Documento"
         '
         'btnEditar
         '
-        Me.btnEditar.Location = New System.Drawing.Point(123, 294)
+        Me.btnEditar.ImageOptions.SvgImage = CType(resources.GetObject("btnEditar.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btnEditar.Location = New System.Drawing.Point(124, 287)
         Me.btnEditar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnEditar.Name = "btnEditar"
-        Me.btnEditar.Size = New System.Drawing.Size(75, 23)
+        Me.btnEditar.Size = New System.Drawing.Size(88, 42)
         Me.btnEditar.TabIndex = 87
         Me.btnEditar.Text = "Editar"
         '
         'btnNuevo
         '
-        Me.btnNuevo.Location = New System.Drawing.Point(11, 294)
+        Me.btnNuevo.ImageOptions.SvgImage = CType(resources.GetObject("btnNuevo.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btnNuevo.Location = New System.Drawing.Point(11, 287)
         Me.btnNuevo.Margin = New System.Windows.Forms.Padding(2)
         Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(75, 23)
+        Me.btnNuevo.Size = New System.Drawing.Size(96, 42)
         Me.btnNuevo.TabIndex = 86
         Me.btnNuevo.Text = "Nuevo"
         '
@@ -317,6 +320,7 @@ Partial Class frmTrasladoAlmacenesDiferentes
         Me.XtraTabPage2.Controls.Add(Me.txtUbicacionOrigen)
         Me.XtraTabPage2.Controls.Add(Me.btnBuscarUbiOrigen)
         Me.XtraTabPage2.Name = "XtraTabPage2"
+        Me.XtraTabPage2.PageEnabled = False
         Me.XtraTabPage2.Size = New System.Drawing.Size(869, 415)
         Me.XtraTabPage2.Text = "Movimientos"
         '
@@ -493,6 +497,7 @@ Partial Class frmTrasladoAlmacenesDiferentes
         Me.XtraTabPage3.Controls.Add(Me.btnEliminarMovimientos)
         Me.XtraTabPage3.Controls.Add(Me.gcDetalle)
         Me.XtraTabPage3.Name = "XtraTabPage3"
+        Me.XtraTabPage3.PageEnabled = False
         Me.XtraTabPage3.Size = New System.Drawing.Size(869, 415)
         Me.XtraTabPage3.Text = "Detalle"
         '

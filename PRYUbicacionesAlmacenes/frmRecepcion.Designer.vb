@@ -127,28 +127,31 @@ Partial Class frmRecepcion
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(204, 157)
+        Me.btnCerrar.ImageOptions.SvgImage = CType(resources.GetObject("btnCerrar.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btnCerrar.Location = New System.Drawing.Point(236, 162)
         Me.btnCerrar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(100, 23)
+        Me.btnCerrar.Size = New System.Drawing.Size(136, 46)
         Me.btnCerrar.TabIndex = 66
         Me.btnCerrar.Text = "Cerrar Documento"
         '
         'btnEditar
         '
-        Me.btnEditar.Location = New System.Drawing.Point(107, 157)
+        Me.btnEditar.ImageOptions.SvgImage = CType(resources.GetObject("btnEditar.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btnEditar.Location = New System.Drawing.Point(122, 162)
         Me.btnEditar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnEditar.Name = "btnEditar"
-        Me.btnEditar.Size = New System.Drawing.Size(75, 23)
+        Me.btnEditar.Size = New System.Drawing.Size(98, 46)
         Me.btnEditar.TabIndex = 65
         Me.btnEditar.Text = "Editar"
         '
         'btnNuevo
         '
-        Me.btnNuevo.Location = New System.Drawing.Point(10, 157)
+        Me.btnNuevo.ImageOptions.SvgImage = CType(resources.GetObject("btnNuevo.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btnNuevo.Location = New System.Drawing.Point(10, 162)
         Me.btnNuevo.Margin = New System.Windows.Forms.Padding(2)
         Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(75, 23)
+        Me.btnNuevo.Size = New System.Drawing.Size(96, 46)
         Me.btnNuevo.TabIndex = 64
         Me.btnNuevo.Text = "Nuevo"
         '
@@ -369,10 +372,11 @@ Partial Class frmRecepcion
         '
         'btnGuardar
         '
+        Me.btnGuardar.ImageOptions.Image = CType(resources.GetObject("btnGuardar.ImageOptions.Image"), System.Drawing.Image)
         Me.btnGuardar.Location = New System.Drawing.Point(19, 196)
         Me.btnGuardar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(130, 23)
+        Me.btnGuardar.Size = New System.Drawing.Size(177, 43)
         Me.btnGuardar.TabIndex = 76
         Me.btnGuardar.Text = "Guardar Movimiento"
         '
@@ -580,10 +584,10 @@ Partial Class frmRecepcion
         '
         'btnEliminarMovimientos
         '
-        Me.btnEliminarMovimientos.ImageOptions.Image = CType(resources.GetObject("btnEliminarMovimientos.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnEliminarMovimientos.ImageOptions.SvgImage = CType(resources.GetObject("btnEliminarMovimientos.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.btnEliminarMovimientos.Location = New System.Drawing.Point(8, 298)
         Me.btnEliminarMovimientos.Name = "btnEliminarMovimientos"
-        Me.btnEliminarMovimientos.Size = New System.Drawing.Size(133, 23)
+        Me.btnEliminarMovimientos.Size = New System.Drawing.Size(149, 40)
         Me.btnEliminarMovimientos.TabIndex = 184
         Me.btnEliminarMovimientos.Text = "Eliminar Movimientos"
         '
@@ -593,9 +597,10 @@ Partial Class frmRecepcion
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(850, 415)
         Me.Controls.Add(Me.XtraTabControl1)
+        Me.IconOptions.SvgImage = CType(resources.GetObject("frmRecepcion.IconOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "frmRecepcion"
-        Me.Text = "frmRecepcion"
+        Me.Text = "Recepción"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabControl1.ResumeLayout(False)

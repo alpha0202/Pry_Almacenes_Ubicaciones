@@ -236,7 +236,7 @@ Public Class FrmBodegas
         SplashScreenManager.ShowForm(Me, GetType(WaitForm1), True, True, False)
         Try
             Dim conexion As clsConexionNew = New clsConexionNew()
-            Dim sql As String = "select f104_Descripcion, f104_Almacen from t104_Almacenes where f104_CO = " + cboCentroOpe.Text + " "
+            Dim sql As String = "select f104_Descripcion, f104_Almacen from t104_Almacenes where f104_CO = '" + cboCentroOpe.Text + "' and f104_Recepcion = 0 "
             conexion.CargarCombo(cboBodega, sql, True, "----")
             SplashScreenManager.CloseForm(False)
         Catch ex As Exception
@@ -308,7 +308,7 @@ Public Class FrmBodegas
             Dim conexion As clsConexionNew = New clsConexionNew()
             Dim LstParametros As New List(Of Parametros)()
             LstParametros.Add(New Parametros("@Material", selectedMat, SqlDbType.VarChar))
-            ds = conexion.SPGetDataSet("SP_Buscar_Material_ubicaciones", LstParametros)
+            ds = conexion.SPGetDataSet("SP_Buscar_Material_ubicaciones", LstParametros) 'buscar materiales entre las ubicaciones
             LimpiarControles()
             DiseñoAlmacenes(ds)
             txtCentroOpe.Text = ""
@@ -361,7 +361,7 @@ Public Class FrmBodegas
 
                 End If
 
-                XtraMessageBox.Show("Ubicación Seleccionada", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                XtraMessageBox.Show($"Ubicación Seleccionada {posicion.Nombre}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.Close()
 
             End If

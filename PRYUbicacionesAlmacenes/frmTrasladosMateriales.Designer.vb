@@ -92,7 +92,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         Me.XtraTabControl1.Location = New System.Drawing.Point(0, 0)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.XtraTabPage1
-        Me.XtraTabControl1.Size = New System.Drawing.Size(843, 507)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(843, 448)
         Me.XtraTabControl1.TabIndex = 0
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XtraTabPage1, Me.XtraTabPage2, Me.XtraTabPage4})
         '
@@ -115,13 +115,13 @@ Partial Class frmTrasladosMateriales_Ubicacion
         Me.XtraTabPage1.Controls.Add(Me.txtCO)
         Me.XtraTabPage1.Controls.Add(Me.lblTipoDoc)
         Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(841, 482)
+        Me.XtraTabPage1.Size = New System.Drawing.Size(841, 423)
         Me.XtraTabPage1.Text = "Encabezado"
         '
         'btnBuscarUbicacion
         '
         Me.btnBuscarUbicacion.ImageOptions.Image = CType(resources.GetObject("btnBuscarUbicacion.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnBuscarUbicacion.Location = New System.Drawing.Point(339, 185)
+        Me.btnBuscarUbicacion.Location = New System.Drawing.Point(340, 185)
         Me.btnBuscarUbicacion.Margin = New System.Windows.Forms.Padding(2)
         Me.btnBuscarUbicacion.Name = "btnBuscarUbicacion"
         Me.btnBuscarUbicacion.Size = New System.Drawing.Size(21, 23)
@@ -129,34 +129,37 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(223, 232)
+        Me.btnCerrar.ImageOptions.SvgImage = CType(resources.GetObject("btnCerrar.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btnCerrar.Location = New System.Drawing.Point(224, 238)
         Me.btnCerrar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(100, 23)
+        Me.btnCerrar.Size = New System.Drawing.Size(137, 47)
         Me.btnCerrar.TabIndex = 74
         Me.btnCerrar.Text = "Cerrar Documento"
         '
         'btnEditar
         '
-        Me.btnEditar.Location = New System.Drawing.Point(117, 232)
+        Me.btnEditar.ImageOptions.SvgImage = CType(resources.GetObject("btnEditar.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btnEditar.Location = New System.Drawing.Point(118, 238)
         Me.btnEditar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnEditar.Name = "btnEditar"
-        Me.btnEditar.Size = New System.Drawing.Size(75, 23)
+        Me.btnEditar.Size = New System.Drawing.Size(88, 47)
         Me.btnEditar.TabIndex = 73
         Me.btnEditar.Text = "Editar"
         '
         'btnNuevo
         '
-        Me.btnNuevo.Location = New System.Drawing.Point(5, 232)
+        Me.btnNuevo.ImageOptions.SvgImage = CType(resources.GetObject("btnNuevo.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.btnNuevo.Location = New System.Drawing.Point(6, 238)
         Me.btnNuevo.Margin = New System.Windows.Forms.Padding(2)
         Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(75, 23)
+        Me.btnNuevo.Size = New System.Drawing.Size(96, 47)
         Me.btnNuevo.TabIndex = 72
         Me.btnNuevo.Text = "Nuevo"
         '
         'txtUbicacionDestino
         '
-        Me.txtUbicacionDestino.Location = New System.Drawing.Point(117, 187)
+        Me.txtUbicacionDestino.Location = New System.Drawing.Point(118, 187)
         Me.txtUbicacionDestino.Margin = New System.Windows.Forms.Padding(2)
         Me.txtUbicacionDestino.Name = "txtUbicacionDestino"
         Me.txtUbicacionDestino.Properties.ReadOnly = True
@@ -167,7 +170,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.LabelControl2.Appearance.Options.UseFont = True
-        Me.LabelControl2.Location = New System.Drawing.Point(5, 188)
+        Me.LabelControl2.Location = New System.Drawing.Point(6, 188)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(105, 16)
         Me.LabelControl2.TabIndex = 70
@@ -175,7 +178,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         'txtEstado
         '
-        Me.txtEstado.Location = New System.Drawing.Point(117, 152)
+        Me.txtEstado.Location = New System.Drawing.Point(118, 152)
         Me.txtEstado.Margin = New System.Windows.Forms.Padding(2)
         Me.txtEstado.Name = "txtEstado"
         Me.txtEstado.Properties.ReadOnly = True
@@ -186,7 +189,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.LabelControl6.Appearance.Options.UseFont = True
-        Me.LabelControl6.Location = New System.Drawing.Point(5, 153)
+        Me.LabelControl6.Location = New System.Drawing.Point(6, 153)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(43, 16)
         Me.LabelControl6.TabIndex = 68
@@ -194,7 +197,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         'txtNroDocto
         '
-        Me.txtNroDocto.Location = New System.Drawing.Point(117, 116)
+        Me.txtNroDocto.Location = New System.Drawing.Point(118, 116)
         Me.txtNroDocto.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNroDocto.Name = "txtNroDocto"
         Me.txtNroDocto.Properties.ReadOnly = True
@@ -205,7 +208,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.LabelControl5.Appearance.Options.UseFont = True
-        Me.LabelControl5.Location = New System.Drawing.Point(5, 117)
+        Me.LabelControl5.Location = New System.Drawing.Point(6, 117)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(61, 16)
         Me.LabelControl5.TabIndex = 66
@@ -213,7 +216,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         'txtTipoDoct
         '
-        Me.txtTipoDoct.Location = New System.Drawing.Point(117, 80)
+        Me.txtTipoDoct.Location = New System.Drawing.Point(118, 80)
         Me.txtTipoDoct.Margin = New System.Windows.Forms.Padding(2)
         Me.txtTipoDoct.Name = "txtTipoDoct"
         Me.txtTipoDoct.Properties.ReadOnly = True
@@ -224,7 +227,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.LabelControl4.Appearance.Options.UseFont = True
-        Me.LabelControl4.Location = New System.Drawing.Point(5, 81)
+        Me.LabelControl4.Location = New System.Drawing.Point(6, 81)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(66, 16)
         Me.LabelControl4.TabIndex = 64
@@ -232,7 +235,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         'txtFechaProceso
         '
-        Me.txtFechaProceso.Location = New System.Drawing.Point(117, 47)
+        Me.txtFechaProceso.Location = New System.Drawing.Point(118, 47)
         Me.txtFechaProceso.Margin = New System.Windows.Forms.Padding(2)
         Me.txtFechaProceso.Name = "txtFechaProceso"
         Me.txtFechaProceso.Properties.ReadOnly = True
@@ -243,7 +246,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.LabelControl1.Appearance.Options.UseFont = True
-        Me.LabelControl1.Location = New System.Drawing.Point(5, 48)
+        Me.LabelControl1.Location = New System.Drawing.Point(6, 48)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(88, 16)
         Me.LabelControl1.TabIndex = 56
@@ -251,7 +254,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         'txtCO
         '
-        Me.txtCO.Location = New System.Drawing.Point(117, 15)
+        Me.txtCO.Location = New System.Drawing.Point(118, 15)
         Me.txtCO.Margin = New System.Windows.Forms.Padding(2)
         Me.txtCO.Name = "txtCO"
         Me.txtCO.Properties.ReadOnly = True
@@ -262,7 +265,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         Me.lblTipoDoc.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.lblTipoDoc.Appearance.Options.UseFont = True
-        Me.lblTipoDoc.Location = New System.Drawing.Point(5, 16)
+        Me.lblTipoDoc.Location = New System.Drawing.Point(6, 16)
         Me.lblTipoDoc.Name = "lblTipoDoc"
         Me.lblTipoDoc.Size = New System.Drawing.Size(96, 16)
         Me.lblTipoDoc.TabIndex = 54
@@ -287,15 +290,15 @@ Partial Class frmTrasladosMateriales_Ubicacion
         Me.XtraTabPage2.Controls.Add(Me.btnBuscarUbiOrigen)
         Me.XtraTabPage2.Name = "XtraTabPage2"
         Me.XtraTabPage2.PageEnabled = False
-        Me.XtraTabPage2.Size = New System.Drawing.Size(841, 482)
-        Me.XtraTabPage2.Text = "Ubicación"
+        Me.XtraTabPage2.Size = New System.Drawing.Size(841, 423)
+        Me.XtraTabPage2.Text = "Movimiento"
         '
         'lblMensaje
         '
         Me.lblMensaje.AutoSize = True
         Me.lblMensaje.Font = New System.Drawing.Font("Tahoma", 12.0!)
         Me.lblMensaje.ForeColor = System.Drawing.Color.Green
-        Me.lblMensaje.Location = New System.Drawing.Point(17, 298)
+        Me.lblMensaje.Location = New System.Drawing.Point(17, 316)
         Me.lblMensaje.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblMensaje.Name = "lblMensaje"
         Me.lblMensaje.Size = New System.Drawing.Size(0, 19)
@@ -304,7 +307,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         'btnGuardar
         '
         Me.btnGuardar.ImageOptions.Image = CType(resources.GetObject("btnGuardar.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnGuardar.Location = New System.Drawing.Point(21, 243)
+        Me.btnGuardar.Location = New System.Drawing.Point(21, 261)
         Me.btnGuardar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(179, 43)
@@ -315,7 +318,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         Me.txtCantidadMovimiento.BackColor = System.Drawing.Color.White
         Me.txtCantidadMovimiento.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtCantidadMovimiento.Location = New System.Drawing.Point(153, 195)
+        Me.txtCantidadMovimiento.Location = New System.Drawing.Point(153, 211)
         Me.txtCantidadMovimiento.Margin = New System.Windows.Forms.Padding(2)
         Me.txtCantidadMovimiento.Name = "txtCantidadMovimiento"
         Me.txtCantidadMovimiento.Size = New System.Drawing.Size(49, 14)
@@ -325,7 +328,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         Me.LabelControl8.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl8.Appearance.Options.UseFont = True
-        Me.LabelControl8.Location = New System.Drawing.Point(21, 196)
+        Me.LabelControl8.Location = New System.Drawing.Point(21, 212)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(117, 14)
         Me.LabelControl8.TabIndex = 93
@@ -333,7 +336,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         'txtCantidadDisponible
         '
-        Me.txtCantidadDisponible.Location = New System.Drawing.Point(153, 155)
+        Me.txtCantidadDisponible.Location = New System.Drawing.Point(153, 171)
         Me.txtCantidadDisponible.Margin = New System.Windows.Forms.Padding(2)
         Me.txtCantidadDisponible.Name = "txtCantidadDisponible"
         Me.txtCantidadDisponible.Properties.ReadOnly = True
@@ -344,7 +347,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl7.Appearance.Options.UseFont = True
-        Me.LabelControl7.Location = New System.Drawing.Point(21, 157)
+        Me.LabelControl7.Location = New System.Drawing.Point(21, 173)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(109, 14)
         Me.LabelControl7.TabIndex = 91
@@ -353,7 +356,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         'txt_SerialMaterial
         '
         Me.txt_SerialMaterial.Enabled = False
-        Me.txt_SerialMaterial.Location = New System.Drawing.Point(121, 118)
+        Me.txt_SerialMaterial.Location = New System.Drawing.Point(451, 82)
         Me.txt_SerialMaterial.Name = "txt_SerialMaterial"
         Me.txt_SerialMaterial.Size = New System.Drawing.Size(280, 20)
         Me.txt_SerialMaterial.TabIndex = 90
@@ -363,7 +366,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         Me.lbl_SerialMat.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_SerialMat.Appearance.Options.UseFont = True
-        Me.lbl_SerialMat.Location = New System.Drawing.Point(19, 124)
+        Me.lbl_SerialMat.Location = New System.Drawing.Point(413, 84)
         Me.lbl_SerialMat.Name = "lbl_SerialMat"
         Me.lbl_SerialMat.Size = New System.Drawing.Size(32, 14)
         Me.lbl_SerialMat.TabIndex = 89
@@ -391,16 +394,16 @@ Partial Class frmTrasladosMateriales_Ubicacion
         'cboLote
         '
         Me.cboLote.FormattingEnabled = True
-        Me.cboLote.Location = New System.Drawing.Point(447, 81)
+        Me.cboLote.Location = New System.Drawing.Point(121, 114)
         Me.cboLote.Name = "cboLote"
-        Me.cboLote.Size = New System.Drawing.Size(148, 21)
+        Me.cboLote.Size = New System.Drawing.Size(280, 21)
         Me.cboLote.TabIndex = 86
         '
         'LabelControl10
         '
         Me.LabelControl10.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.LabelControl10.Appearance.Options.UseFont = True
-        Me.LabelControl10.Location = New System.Drawing.Point(412, 81)
+        Me.LabelControl10.Location = New System.Drawing.Point(19, 119)
         Me.LabelControl10.Name = "LabelControl10"
         Me.LabelControl10.Size = New System.Drawing.Size(29, 16)
         Me.LabelControl10.TabIndex = 85
@@ -442,7 +445,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         Me.XtraTabPage4.Controls.Add(Me.gcDetalle)
         Me.XtraTabPage4.Name = "XtraTabPage4"
         Me.XtraTabPage4.PageEnabled = False
-        Me.XtraTabPage4.Size = New System.Drawing.Size(841, 482)
+        Me.XtraTabPage4.Size = New System.Drawing.Size(841, 423)
         Me.XtraTabPage4.Text = "Detalle"
         '
         'btnEliminarMovimientos
@@ -576,7 +579,7 @@ Partial Class frmTrasladosMateriales_Ubicacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(843, 507)
+        Me.ClientSize = New System.Drawing.Size(843, 448)
         Me.Controls.Add(Me.XtraTabControl1)
         Me.IconOptions.SvgImage = CType(resources.GetObject("frmTrasladosMateriales_Ubicacion.IconOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.Name = "frmTrasladosMateriales_Ubicacion"

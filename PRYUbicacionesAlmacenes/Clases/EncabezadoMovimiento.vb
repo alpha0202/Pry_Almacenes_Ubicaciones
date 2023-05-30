@@ -665,76 +665,11 @@ Public Class EncabezadoMovimiento
                 mensaje = conexion.SPGetEscalar("SP_CerrarMovimientoTRU", LstParametros).ToString
 
                 If mensaje <> "" Then
-                    Return mensaje
-                Else
                     Throw New Exception($"Error cerrando movimiento TRU. {mensaje}")
+
                 End If
 
             End If
-
-
-            'ESTO NO SE UTILIZA, PORQUE SON TRASLADOS ENTRE UBICACIONES DEL IGUAL CL E IGUAL ALMACEN
-            'If estado = "X" Then
-            '    Dim LstParametros As New List(Of Parametros)()
-            '    Dim respuesta As New DataTable
-            '    Dim prd = RfcDestinationManager.GetDestination("SE37")
-            '    Dim repo As RfcRepository = prd.Repository
-            '    Dim soBapi As IRfcFunction = repo.CreateFunction("Z_MDFN_MIGO")
-            '    soBapi.SetValue("O_WERKS", encabezado.f300_CO)
-            '    soBapi.SetValue("O_LGORT", encabezado.f300_AlmacenOrigen)
-            '    soBapi.SetValue("D_WERKS", encabezado.f300_CO)
-            '    soBapi.SetValue("D_LGORT", encabezado.f300_AlmacenDestino)
-            '    soBapi.SetValue("D_FECHA", encabezado.f300_FechaHoraCreacion)
-            '    soBapi.SetValue("ALIAR", encabezado.f300_TipoDocumento + encabezado.f300_NroDocumento.ToString())
-
-            '    Dim sqlDetalle As String
-            '    sqlDetalle = "SELECT f301_Referencia as MATNR,f301_Cantidad as MENGE, f301_Lote, f301_SerialMaterial  FROM t301_DetMovimientos WHERE f301_RowIDDocumento = " + rowId + " AND f301_EstadoMov = 'C'"
-            '    Dim dtDetalle As New DataTable
-            '    dtDetalle = conexion.ObtenerDataTable(sqlDetalle)
-
-            '    Dim tablaEntrada As IRfcTable = soBapi.GetTable("IT_MAT")
-            '    'Dim stru As RfcStructureMetadata = repo.GetStructureMetadata("ZTBAPIMIGOTRAS")
-            '    For Each dr As DataRow In dtDetalle.Rows
-            '        'Dim datos As IRfcStructure = stru.CreateStructure()
-            '        tablaEntrada.Append()
-            '        tablaEntrada.SetValue("MATNR", Format(CDec(dr("MATNR").ToString()), "000000000000000000"))
-            '        tablaEntrada.SetValue("MENGE", dr("MENGE").ToString())
-            '        tablaEntrada.SetValue("CHARG", dr("f301_Lote").ToString())
-            '        tablaEntrada.SetValue("SERNR", dr("f301_SerialMaterial").ToString()) 'SERIAL MATERIAL
-
-            '    Next
-
-            '    soBapi.SetValue("IT_MAT", tablaEntrada)
-
-            '    soBapi.Invoke(prd)
-            '    Dim IT_KNA1 As IRfcTable = soBapi.GetTable("IT_OUT")
-
-            '    respuesta = Utilidades.ConvertToDotNetTable(IT_KNA1)
-
-            '    If respuesta.Rows.Count > 0 Then
-            '        Dim dr As DataRow
-            '        dr = respuesta.Rows(0)
-            '        Dim mensaje As String = dr(4).ToString()
-            '        If Not String.IsNullOrEmpty(mensaje) Then
-            '            Throw New ArgumentException(mensaje)
-            '        End If
-            '        Dim NroDocto As String = dr(1).ToString()
-            '        Dim tipoDocto As String = dr(2).ToString()
-            '        'actualizar la interzase
-            '        sql = "update t300_EncMovimientos set f300_EstadoDoc = 'C', f300_TipoDocInterface = '" + tipoDocto + "', f300_NroDocInterface = " + NroDocto + " where f300_RowID = " + rowId
-            '        conexion.GetEscalar(sql)
-
-            '    Else
-            '        Throw New ArgumentException("error SAP al enviar el documento")
-            '    End If
-
-            '    Return ""
-            'End If
-
-
-            'If estado = "C" Then
-            '    Return "El documento ha cambiado de estado"
-            'End If
 
 
             Return ""
@@ -772,7 +707,7 @@ Public Class EncabezadoMovimiento
             End If
 
 
-            'ESTO NO SE UTILIZA, PORQUE SON TRASLADOS ENTRE UBICACIONES DEL IGUAL CL E IGUAL ALMACEN
+            'SE UTILIZA MIGO, PORQUE ES UN TRASLADO ENTRE ALMACENES.
             If estado = "X" Then
                 Dim LstParametros As New List(Of Parametros)()
                 Dim respuesta As New DataTable

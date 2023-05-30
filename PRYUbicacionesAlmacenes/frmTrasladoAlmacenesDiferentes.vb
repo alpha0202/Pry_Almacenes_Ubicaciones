@@ -1,4 +1,6 @@
-﻿Imports DevExpress.XtraEditors
+﻿Imports System.Collections
+Imports DevExpress.XtraEditors
+Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraSplashScreen
 
 Public Class frmTrasladoAlmacenesDiferentes
@@ -228,13 +230,17 @@ Public Class frmTrasladoAlmacenesDiferentes
                 Throw New ArgumentException("digite la ubicacion origen")
             End If
 
+            If String.IsNullOrEmpty(txtUbicacionDestino.Text) Then
+                Throw New ArgumentException("digite la ubicacion destino")
+            End If
+
             If cboMateriales.SelectedValue.ToString() = "0" Then
-                Throw New ArgumentException("Seleccione la referencia")
+                Throw New ArgumentException("Seleccione el material")
             End If
 
             If tieneSerial Then
                 If String.IsNullOrEmpty(txt_SerialMaterial.Text) Then
-                    Throw New ArgumentException("Debe digitar el serial para guardar operación.")
+                    Throw New ArgumentException("Debe digitar el serial para guardar la operación.")
                 Else
                     serialMat_digitado = String.Concat("0000000000", txt_SerialMaterial.Text)
                 End If
@@ -293,13 +299,17 @@ Public Class frmTrasladoAlmacenesDiferentes
                 Throw New ArgumentException(dr(0).ToString)
             End If
 
-            lblMensaje.Text = "Se Proceso Correctamente"
+            lblMensaje.Text = "Procesado Correctamente"
             lblMensaje.Font = New Font("Tahoma", 13, FontStyle.Bold)
             cboMateriales.SelectedIndex = 0
             txt_SerialMaterial.Text = ""
             txt_SerialMaterial.Enabled = False
             txt_SerialMaterial.Visible = False
             lbl_SerialMat.Visible = False
+            txtUbicacionDestino.Text = ""
+            txtUbicacionOrigen.Text = ""
+            txtAlmDestino.Text = ""
+            txtAlmOrigen.Text = ""
             txtCantidadDisponible.Text = ""
             txtCantidadMovimiento.Text = ""
 
@@ -408,6 +418,61 @@ Public Class frmTrasladoAlmacenesDiferentes
             txtEstado.Text = ""
         End Try
     End Sub
+
+    Private Sub EliminarMovimiento()
+        Try
+            'ValidarEstadoAlistamiento(txtTipoDocBase.Text, txtNroDocumentoBase.Text, txtCodigoCentroO.Text)
+            Dim DatosSelect As New List(Of DetalleMovimiento)
+            ' agrega a la lista las filas seleccionadas
+            Dim I As Integer
+            For I = 0 To gvDetalle.SelectedRowsCount() - 1
+                If (gvDetalle.GetSelectedRows()(I) >= 0) Then
+                    Dim view As GridView = gvDetalle
+                    DatosSelect.Add(CType(view.GetRow(gvDetalle.GetSelectedRows()(I)), DetalleMovimiento))
+                End If
+            Next
+
+            If DatosSelect.Count > 0 Then
+                If XtraMessageBox.Show("¿Esta seguro de eliminar?", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
+                    SplashScreenManager.ShowForm(Me, GetType(WaitForm1), True, True, False)
+                    Dim arrayMoviminetos As New ArrayList()
+                    Dim SQL As String = ""
+                    For I = 0 To DatosSelect.Count - 1
+                        Dim Row As DetalleMovimiento = CType(DatosSelect(I), DetalleMovimiento)
+                        arrayMoviminetos.Add(Row.f301_RowID.ToString)
+                    Next
+                    Dim conexion As clsConexionNew = New clsConexionNew()
+                    Dim LstParametros As New List(Of Parametros)()
+                    LstParametros.Add(New Parametros("@usuario", Utilidades.getUsuario(), SqlDbType.VarChar))
+                    LstParametros.Add(New Parametros("@rowPedidos", String.Join(";", CType(arrayMoviminetos.ToArray(Type.GetType("System.String")), String())), SqlDbType.VarChar))
+                    LstParametros.Add(New Parametros("@rowIdDocumento", ROWID, SqlDbType.VarChar))
+                    Dim respuesta As String = CStr(conexion.SPGetEscalar("SP_EliminarMovimientosTRA", LstParametros))
+                    If respuesta = "" Then
+                        Dim encabezado As New EncabezadoMovimiento()
+                        encabezado = EncabezadoMovimiento.GetEncabezadoMovimiento(ROWID)
+                        txtTipoDoct.Text = encabezado.f300_TipoDocumento
+                        txtNroDocto.Text = encabezado.f300_NroDocumento.ToString()
+                        txtEstado.Text = encabezado.f300_EstadoDoc
+
+                        gcDetalle.DataSource = encabezado.listDetalleMovimiento
+                        gvDetalle.BestFitColumns()
+                        SplashScreenManager.CloseForm(False)
+                    Else
+                        SplashScreenManager.CloseForm(False)
+                        XtraMessageBox.Show(respuesta, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                End If
+            Else
+                SplashScreenManager.CloseForm(False)
+                XtraMessageBox.Show("Nada Seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
+        Catch ex As Exception
+            SplashScreenManager.CloseForm(False)
+            XtraMessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
 
     Private Sub GetAlmacenDeUbicacion(ubicacion As String)
         Dim AlmacenUbicacion = AlmacenUbicaciones.GetAlmacen_ByUbicacion(ubicacion)
@@ -526,5 +591,9 @@ Public Class frmTrasladoAlmacenesDiferentes
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         CerrarMovimientoTRA()
+    End Sub
+
+    Private Sub btnEliminarMovimientos_Click(sender As Object, e As EventArgs) Handles btnEliminarMovimientos.Click
+        EliminarMovimiento()
     End Sub
 End Class

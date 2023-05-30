@@ -100,10 +100,12 @@ Public Class Utilidades
     End Function
 
 
-    Public Shared Function BuscarUbicacion()
+    Public Shared Function BuscarUbicacion(ByVal tipoTraslado As String)
+
+
         Dim frmBodegasUbicaciones As FrmBodegas = New FrmBodegas()
         frmBodegasUbicaciones.Solicitud_Ubicacion = True
-        frmBodegasUbicaciones.form_solicita = "TRU"
+        frmBodegasUbicaciones.form_solicita = tipoTraslado.Trim()
         frmBodegasUbicaciones.ShowDialog()
         frmBodegasUbicaciones.Dispose()
 

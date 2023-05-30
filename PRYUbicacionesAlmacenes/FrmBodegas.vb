@@ -354,6 +354,10 @@ Public Class FrmBodegas
 
                     frmTrasladosMateriales_Ubicacion.RecibirUbicacion(posicion.Nombre)
 
+                ElseIf form_solicita = "TRA" Then
+
+                    frmTrasladoAlmacenesDiferentes.RecibirUbicacion(posicion.Nombre)
+
 
                 End If
 
@@ -372,9 +376,6 @@ Public Class FrmBodegas
     End Sub
 
 
-    Private Sub TomarUbicacionDestino(sender As Object, e As System.EventArgs)
-
-    End Sub
 
 
     Private Sub DiseñoAlmacenes(ds As DataSet)
@@ -410,7 +411,6 @@ Public Class FrmBodegas
         '-----
 
         'filas
-
         Dim totalFilas As Integer = CInt(dtFilas.Rows(0)(0).ToString())
 
         Dim listFila As List(Of Filas) = New List(Of Filas)()
@@ -754,8 +754,8 @@ Public Class FrmBodegas
         flpFilas.Controls.Clear()
         flpGrupoCeldas.Controls.Clear()
         'cboMateriales.SelectedIndex = 0
-        cboCentroOpe.SelectedIndex = 0
-        cboBodega.SelectedValue = 0
+        'cboCentroOpe.SelectedIndex = 0
+        'cboBodega.SelectedValue = 0
 
     End Sub
 

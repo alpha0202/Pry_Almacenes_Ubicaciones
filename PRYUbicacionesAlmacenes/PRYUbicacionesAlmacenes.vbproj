@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Almacenes.vb" />
+    <Compile Include="Clases\AlmacenUbicaciones.vb" />
     <Compile Include="Clases\ConstruirAlmacenes.vb" />
     <Compile Include="Clases\DetalleMovimiento.vb" />
     <Compile Include="Clases\EncabezadoMovimiento.vb" />
@@ -119,6 +120,18 @@
     <Compile Include="frmDocumentosRecepcion.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmDocumentosTrasladosUbicaciones.Designer.vb">
+      <DependentUpon>frmDocumentosTrasladosUbicaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDocumentosTrasladosUbicaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDocumentosTrasladosUbiAlmacenes.Designer.vb">
+      <DependentUpon>frmDocumentosTrasladosUbiAlmacenes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDocumentosTrasladosUbiAlmacenes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPrincipal.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -137,10 +150,10 @@
     <Compile Include="frmRecepcion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTrasladoBodegasDiferentes.Designer.vb">
-      <DependentUpon>frmTrasladoBodegasDiferentes.vb</DependentUpon>
+    <Compile Include="frmTrasladoAlmacenesDiferentes.Designer.vb">
+      <DependentUpon>frmTrasladoAlmacenesDiferentes.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmTrasladoBodegasDiferentes.vb">
+    <Compile Include="frmTrasladoAlmacenesDiferentes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmTrasladosMateriales.Designer.vb">
@@ -174,6 +187,12 @@
     <EmbeddedResource Include="frmDocumentosRecepcion.resx">
       <DependentUpon>frmDocumentosRecepcion.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDocumentosTrasladosUbicaciones.resx">
+      <DependentUpon>frmDocumentosTrasladosUbicaciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDocumentosTrasladosUbiAlmacenes.resx">
+      <DependentUpon>frmDocumentosTrasladosUbiAlmacenes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
     </EmbeddedResource>
@@ -183,8 +202,8 @@
     <EmbeddedResource Include="frmRecepcion.resx">
       <DependentUpon>frmRecepcion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTrasladoBodegasDiferentes.resx">
-      <DependentUpon>frmTrasladoBodegasDiferentes.vb</DependentUpon>
+    <EmbeddedResource Include="frmTrasladoAlmacenesDiferentes.resx">
+      <DependentUpon>frmTrasladoAlmacenesDiferentes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTrasladosMateriales.resx">
       <DependentUpon>frmTrasladosMateriales.vb</DependentUpon>

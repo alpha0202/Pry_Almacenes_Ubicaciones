@@ -274,7 +274,6 @@ Public Class EncabezadoMovimiento
     End Function
 
 
-
     Public Shared Function ListEncabezadoMovimientoDVP(ByVal co As String, ByVal almacen As String) As List(Of EncabezadoMovimiento)
 
 
@@ -307,6 +306,89 @@ Public Class EncabezadoMovimiento
             encabezado.f300_FechaHoraActualizacion = CDate(dr("f300_FechaHoraActualizacion").ToString())
             'encabezado.f300_UsuarioCierre = dr("f300_UsuarioCierre").ToString()
             encabezado.f300_FechaHoraCierre = CDate(dr("f300_FechaHoraCierre").ToString())
+            'encabezado.f300_UsuarioAnulacion = dr("f300_UsuarioAnulacion").ToString()
+            'encabezado.f300_FechaHoraAnulacion = dr("f300_FechaHoraAnulacion").ToString()
+
+            listEncabezado.Add(encabezado)
+        Next
+
+        Return listEncabezado
+    End Function
+
+    Public Shared Function ListEncabezadoMovimientoTRU(ByVal co As String, ByVal almacen As String) As List(Of EncabezadoMovimiento)
+
+
+        Dim listEncabezado As New List(Of EncabezadoMovimiento)
+        Dim conexion As clsConexionNew = New clsConexionNew()
+        Dim LstParametros = New List(Of Parametros)()
+        LstParametros.Add(New Parametros("@co", co, SqlDbType.VarChar))
+        LstParametros.Add(New Parametros("@almacen", almacen, SqlDbType.VarChar))
+        Dim dt As New DataTable
+        dt = conexion.SPObtenerDataTable("SP_GetListEncMovimientosTrasladosUbicacion", LstParametros)
+
+        For Each dr As DataRow In dt.Rows
+            Dim encabezado As New EncabezadoMovimiento()
+
+            encabezado.f300_RowID = CDec(dr("f300_RowID").ToString())
+            encabezado.f300_CO = dr("f300_CO").ToString()
+            encabezado.f300_TipoDocumento = dr("f300_TipoDocumento").ToString()
+            encabezado.f300_NroDocumento = CDec(dr("f300_NroDocumento").ToString())
+            encabezado.f300_FechaDocumento = CDate(dr("f300_FechaDocumento").ToString())
+            encabezado.f300_DocumentoBase = dr("f300_DocumentoBase").ToString()
+            'encabezado.f300_NroDocumentoBase = CDec(dr("f300_NroDocumentoBase").ToString())
+            encabezado.f300_AlmacenOrigen = dr("f300_AlmacenOrigen").ToString()
+            encabezado.f300_AlmacenDestino = dr("f300_AlmacenDestino").ToString()
+            encabezado.f300_EstadoDoc = dr("f300_EstadoDoc").ToString()
+            encabezado.f300_TipoDocInterface = dr("f300_TipoDocInterface").ToString()
+            'encabezado.f300_NroDocInterface = dr("f300_NroDocInterface").ToString()
+            encabezado.f300_UsuarioCreacion = dr("f300_UsuarioCreacion").ToString()
+            encabezado.f300_FechaHoraCreacion = CDate(dr("f300_FechaHoraCreacion").ToString())
+            encabezado.f300_UsuarioActualizacion = dr("f300_UsuarioActualizacion").ToString()
+            'encabezado.f300_FechaHoraActualizacion = CDate(dr("f300_FechaHoraActualizacion").ToString())
+            'encabezado.f300_UsuarioCierre = dr("f300_UsuarioCierre").ToString()
+            'encabezado.f300_FechaHoraCierre = CDate(dr("f300_FechaHoraCierre").ToString())
+            'encabezado.f300_UsuarioAnulacion = dr("f300_UsuarioAnulacion").ToString()
+            'encabezado.f300_FechaHoraAnulacion = dr("f300_FechaHoraAnulacion").ToString()
+
+            listEncabezado.Add(encabezado)
+        Next
+
+        Return listEncabezado
+    End Function
+
+
+    Public Shared Function ListEncabezadoMovimientoTRA(ByVal co As String, ByVal almacen As String) As List(Of EncabezadoMovimiento)
+
+
+        Dim listEncabezado As New List(Of EncabezadoMovimiento)
+        Dim conexion As clsConexionNew = New clsConexionNew()
+        Dim LstParametros = New List(Of Parametros)()
+        LstParametros.Add(New Parametros("@co", co, SqlDbType.VarChar))
+        LstParametros.Add(New Parametros("@almacen", almacen, SqlDbType.VarChar))
+        Dim dt As New DataTable
+        dt = conexion.SPObtenerDataTable("SP_GetListEncMovimientosTrasladosAlmacenes", LstParametros)
+
+        For Each dr As DataRow In dt.Rows
+            Dim encabezado As New EncabezadoMovimiento()
+
+            encabezado.f300_RowID = CDec(dr("f300_RowID").ToString())
+            encabezado.f300_CO = dr("f300_CO").ToString()
+            encabezado.f300_TipoDocumento = dr("f300_TipoDocumento").ToString()
+            encabezado.f300_NroDocumento = CDec(dr("f300_NroDocumento").ToString())
+            encabezado.f300_FechaDocumento = CDate(dr("f300_FechaDocumento").ToString())
+            encabezado.f300_DocumentoBase = dr("f300_DocumentoBase").ToString()
+            'encabezado.f300_NroDocumentoBase = CDec(dr("f300_NroDocumentoBase").ToString())
+            encabezado.f300_AlmacenOrigen = dr("f300_AlmacenOrigen").ToString()
+            encabezado.f300_AlmacenDestino = dr("f300_AlmacenDestino").ToString()
+            encabezado.f300_EstadoDoc = dr("f300_EstadoDoc").ToString()
+            encabezado.f300_TipoDocInterface = dr("f300_TipoDocInterface").ToString()
+            'encabezado.f300_NroDocInterface = dr("f300_NroDocInterface").ToString()
+            encabezado.f300_UsuarioCreacion = dr("f300_UsuarioCreacion").ToString()
+            encabezado.f300_FechaHoraCreacion = CDate(dr("f300_FechaHoraCreacion").ToString())
+            encabezado.f300_UsuarioActualizacion = dr("f300_UsuarioActualizacion").ToString()
+            'encabezado.f300_FechaHoraActualizacion = CDate(dr("f300_FechaHoraActualizacion").ToString())
+            'encabezado.f300_UsuarioCierre = dr("f300_UsuarioCierre").ToString()
+            'encabezado.f300_FechaHoraCierre = CDate(dr("f300_FechaHoraCierre").ToString())
             'encabezado.f300_UsuarioAnulacion = dr("f300_UsuarioAnulacion").ToString()
             'encabezado.f300_FechaHoraAnulacion = dr("f300_FechaHoraAnulacion").ToString()
 
@@ -563,6 +645,201 @@ Public Class EncabezadoMovimiento
         End Try
     End Function
 
+    Public Shared Function CerrarMovimientoTRU(ByVal rowId As String) As String
+        Try
+            Dim conexion As clsConexionNew = New clsConexionNew()
+            ''CONSULTAR ESTADO MOVIMIENTO
+            Dim sql As String = "Select f300_EstadoDoc from t300_EncMovimientos where f300_RowID = " + rowId
+            Dim estado As String = conexion.GetEscalar(sql).ToString
 
+            Dim encabezado As New EncabezadoMovimiento()
+            encabezado = EncabezadoMovimiento.GetEncabezadoMovimiento(rowId)
+
+            If estado = "A" Then
+
+                Dim mensaje As String
+
+                Dim LstParametros As New List(Of Parametros)()
+                LstParametros.Add(New Parametros("@usuario", Utilidades.getUsuario(), SqlDbType.VarChar))
+                LstParametros.Add(New Parametros("@RowIdMovimiento", rowId, SqlDbType.VarChar))
+                mensaje = conexion.SPGetEscalar("SP_CerrarMovimientoTRU", LstParametros).ToString
+
+                If mensaje <> "" Then
+                    Return mensaje
+                Else
+                    Throw New Exception($"Error cerrando movimiento TRU. {mensaje}")
+                End If
+
+            End If
+
+
+            'ESTO NO SE UTILIZA, PORQUE SON TRASLADOS ENTRE UBICACIONES DEL IGUAL CL E IGUAL ALMACEN
+            'If estado = "X" Then
+            '    Dim LstParametros As New List(Of Parametros)()
+            '    Dim respuesta As New DataTable
+            '    Dim prd = RfcDestinationManager.GetDestination("SE37")
+            '    Dim repo As RfcRepository = prd.Repository
+            '    Dim soBapi As IRfcFunction = repo.CreateFunction("Z_MDFN_MIGO")
+            '    soBapi.SetValue("O_WERKS", encabezado.f300_CO)
+            '    soBapi.SetValue("O_LGORT", encabezado.f300_AlmacenOrigen)
+            '    soBapi.SetValue("D_WERKS", encabezado.f300_CO)
+            '    soBapi.SetValue("D_LGORT", encabezado.f300_AlmacenDestino)
+            '    soBapi.SetValue("D_FECHA", encabezado.f300_FechaHoraCreacion)
+            '    soBapi.SetValue("ALIAR", encabezado.f300_TipoDocumento + encabezado.f300_NroDocumento.ToString())
+
+            '    Dim sqlDetalle As String
+            '    sqlDetalle = "SELECT f301_Referencia as MATNR,f301_Cantidad as MENGE, f301_Lote, f301_SerialMaterial  FROM t301_DetMovimientos WHERE f301_RowIDDocumento = " + rowId + " AND f301_EstadoMov = 'C'"
+            '    Dim dtDetalle As New DataTable
+            '    dtDetalle = conexion.ObtenerDataTable(sqlDetalle)
+
+            '    Dim tablaEntrada As IRfcTable = soBapi.GetTable("IT_MAT")
+            '    'Dim stru As RfcStructureMetadata = repo.GetStructureMetadata("ZTBAPIMIGOTRAS")
+            '    For Each dr As DataRow In dtDetalle.Rows
+            '        'Dim datos As IRfcStructure = stru.CreateStructure()
+            '        tablaEntrada.Append()
+            '        tablaEntrada.SetValue("MATNR", Format(CDec(dr("MATNR").ToString()), "000000000000000000"))
+            '        tablaEntrada.SetValue("MENGE", dr("MENGE").ToString())
+            '        tablaEntrada.SetValue("CHARG", dr("f301_Lote").ToString())
+            '        tablaEntrada.SetValue("SERNR", dr("f301_SerialMaterial").ToString()) 'SERIAL MATERIAL
+
+            '    Next
+
+            '    soBapi.SetValue("IT_MAT", tablaEntrada)
+
+            '    soBapi.Invoke(prd)
+            '    Dim IT_KNA1 As IRfcTable = soBapi.GetTable("IT_OUT")
+
+            '    respuesta = Utilidades.ConvertToDotNetTable(IT_KNA1)
+
+            '    If respuesta.Rows.Count > 0 Then
+            '        Dim dr As DataRow
+            '        dr = respuesta.Rows(0)
+            '        Dim mensaje As String = dr(4).ToString()
+            '        If Not String.IsNullOrEmpty(mensaje) Then
+            '            Throw New ArgumentException(mensaje)
+            '        End If
+            '        Dim NroDocto As String = dr(1).ToString()
+            '        Dim tipoDocto As String = dr(2).ToString()
+            '        'actualizar la interzase
+            '        sql = "update t300_EncMovimientos set f300_EstadoDoc = 'C', f300_TipoDocInterface = '" + tipoDocto + "', f300_NroDocInterface = " + NroDocto + " where f300_RowID = " + rowId
+            '        conexion.GetEscalar(sql)
+
+            '    Else
+            '        Throw New ArgumentException("error SAP al enviar el documento")
+            '    End If
+
+            '    Return ""
+            'End If
+
+
+            'If estado = "C" Then
+            '    Return "El documento ha cambiado de estado"
+            'End If
+
+
+            Return ""
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+    End Function
+
+
+    Public Shared Function CerrarMovimientoTrasladoTRA(ByVal rowId As String) As String
+        Try
+            Dim conexion As clsConexionNew = New clsConexionNew()
+            ''CONSULTAR ESTADO MOVIMIENTO
+            Dim sql As String = "Select f300_EstadoDoc from t300_EncMovimientos where f300_RowID = " + rowId
+            Dim estado As String = conexion.GetEscalar(sql).ToString
+
+            Dim encabezado As New EncabezadoMovimiento()
+            encabezado = EncabezadoMovimiento.GetEncabezadoMovimiento(rowId)
+
+            If estado = "A" Then
+
+                Dim mensaje As String
+
+                Dim LstParametros As New List(Of Parametros)()
+                LstParametros.Add(New Parametros("@usuario", Utilidades.getUsuario(), SqlDbType.VarChar))
+                LstParametros.Add(New Parametros("@RowIdMovimiento", rowId, SqlDbType.VarChar))
+                mensaje = conexion.SPGetEscalar("SP_CerrarMovimientoTRA", LstParametros).ToString
+
+                If mensaje <> "" Then
+                    Return mensaje
+                Else
+                    estado = "X"
+                End If
+
+            End If
+
+
+            'ESTO NO SE UTILIZA, PORQUE SON TRASLADOS ENTRE UBICACIONES DEL IGUAL CL E IGUAL ALMACEN
+            If estado = "X" Then
+                Dim LstParametros As New List(Of Parametros)()
+                Dim respuesta As New DataTable
+                Dim prd = RfcDestinationManager.GetDestination("SE37")
+                Dim repo As RfcRepository = prd.Repository
+                Dim soBapi As IRfcFunction = repo.CreateFunction("Z_MDFN_MIGO")
+                soBapi.SetValue("O_WERKS", encabezado.f300_CO)
+                soBapi.SetValue("O_LGORT", encabezado.f300_AlmacenOrigen)
+                soBapi.SetValue("D_WERKS", encabezado.f300_CO)
+                soBapi.SetValue("D_LGORT", encabezado.f300_AlmacenDestino)
+                soBapi.SetValue("D_FECHA", encabezado.f300_FechaHoraCreacion)
+                soBapi.SetValue("ALIAR", encabezado.f300_TipoDocumento + encabezado.f300_NroDocumento.ToString())
+
+                Dim sqlDetalle As String
+                sqlDetalle = "SELECT f301_Referencia as MATNR,f301_Cantidad as MENGE, f301_Lote, f301_SerialMaterial  FROM t301_DetMovimientos WHERE f301_RowIDDocumento = " + rowId + " AND f301_EstadoMov = 'C'"
+                Dim dtDetalle As New DataTable
+                dtDetalle = conexion.ObtenerDataTable(sqlDetalle)
+
+                Dim tablaEntrada As IRfcTable = soBapi.GetTable("IT_MAT")
+                'Dim stru As RfcStructureMetadata = repo.GetStructureMetadata("ZTBAPIMIGOTRAS")
+                For Each dr As DataRow In dtDetalle.Rows
+                    'Dim datos As IRfcStructure = stru.CreateStructure()
+                    tablaEntrada.Append()
+                    tablaEntrada.SetValue("MATNR", Format(CDec(dr("MATNR").ToString()), "000000000000000000"))
+                    tablaEntrada.SetValue("MENGE", dr("MENGE").ToString())
+                    tablaEntrada.SetValue("CHARG", dr("f301_Lote").ToString())
+                    tablaEntrada.SetValue("SERNR", dr("f301_SerialMaterial").ToString()) 'SERIAL MATERIAL
+
+                Next
+
+                soBapi.SetValue("IT_MAT", tablaEntrada)
+
+                soBapi.Invoke(prd)
+                Dim IT_KNA1 As IRfcTable = soBapi.GetTable("IT_OUT")
+
+                respuesta = Utilidades.ConvertToDotNetTable(IT_KNA1)
+
+                If respuesta.Rows.Count > 0 Then
+                    Dim dr As DataRow
+                    dr = respuesta.Rows(0)
+                    Dim mensaje As String = dr(4).ToString()
+                    If Not String.IsNullOrEmpty(mensaje) Then
+                        Throw New ArgumentException(mensaje)
+                    End If
+                    Dim NroDocto As String = dr(1).ToString()
+                    Dim tipoDocto As String = dr(2).ToString()
+                    'actualizar la interzase
+                    sql = "update t300_EncMovimientos set f300_EstadoDoc = 'C', f300_TipoDocInterface = '" + tipoDocto + "', f300_NroDocInterface = " + NroDocto + " where f300_RowID = " + rowId
+                    conexion.GetEscalar(sql)
+
+                Else
+                    Throw New ArgumentException("error SAP al enviar el documento")
+                End If
+
+                Return ""
+            End If
+
+
+            If estado = "C" Then
+                Return "El documento ha cambiado de estado"
+            End If
+
+
+            Return ""
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+    End Function
 
 End Class

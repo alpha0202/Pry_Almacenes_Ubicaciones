@@ -50,6 +50,7 @@
     End Property
 
 
+
     Public Shared Function GetAlmacenRecepcion(ByVal almacen As String) As Almacenes
         Dim alm As New Almacenes()
         Dim conexion As clsConexionNew = New clsConexionNew()
@@ -77,7 +78,7 @@
         alm.nulos = CBool(dr("f104_Nulos").ToString())
 
         If (alm.estado <> "A") Then
-            Throw New ArgumentException("el almacen esta inactivo")
+            Throw New ArgumentException("El almacen está inactivo")
         End If
 
         Return alm
@@ -85,4 +86,7 @@
 
 
 
+
+
 End Class
+

@@ -1,18 +1,20 @@
 ﻿Imports DevExpress.XtraEditors
 Imports DevExpress.XtraSplashScreen
 
-Public Class frmTrasladosMateriales_Ubicacion
-
+Public Class frmTrasladoAlmacenesDiferentes
     Private CO As String
     Private ubicacionDestino As Boolean = False
     Private ubicacionOrigen As Boolean = False
     Private ALMACEN As String
+    Private ALMACEN_ORIGEN As String
+    Private ALMACEN_DESTINO As String
     Private ALMRECEPCION As String
     Private ROWID As String = String.Empty
     Private tieneSerial As Boolean = False
+    Dim AlmUbi As AlmacenUbicaciones = New AlmacenUbicaciones()
 
-    Private Sub frmTrasladosMateriales_Ubicacion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    Private Sub frmTrasladoAlmacenesDiferentes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             Dim user As New Usuarios()
             user = Usuarios.GetUsuario(My.User.Name.ToUpper.Replace("ALIAR\", ""))
@@ -35,65 +37,7 @@ Public Class frmTrasladosMateriales_Ubicacion
             XtraMessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Dispose()
         End Try
-
-
-
-
     End Sub
-
-
-    Public Sub RecibirUbicacion(ubicacionSelected As String)
-
-        If ubicacionDestino Then
-
-            If String.IsNullOrEmpty(txtUbicacionDestino.Text) Then
-                txtUbicacionDestino.Text = ubicacionSelected.Trim()
-                ubicacionDestino = False
-            Else
-
-
-                If XtraMessageBox.Show($"Ya se encuentra una ubicación Destino seleccionada, ¿Desea cambiarla?", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
-                    txtUbicacionDestino.Text = ubicacionSelected.Trim()
-                    ubicacionDestino = False
-                End If
-            End If
-
-
-        ElseIf ubicacionOrigen Then
-            Dim iguales As Boolean
-
-            If String.IsNullOrEmpty(txtUbicacionOrigen.Text) Then
-                txtUbicacionOrigen.Text = ubicacionSelected.Trim()
-                ubicacionOrigen = False
-
-                iguales = txtUbicacionDestino.Text.Trim().Equals(txtUbicacionOrigen.Text.Trim())
-                If iguales Then
-                    XtraMessageBox.Show("La ubicación de destino y origen, no pueden se iguales", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    txtUbicacionOrigen.Text = ""
-
-                    'Else
-                    '    txtUbicacionOrigen.Text = ubicacionSelected.Trim()
-                    '    ubicacionOrigen = False
-
-                End If
-
-
-            Else
-
-                If XtraMessageBox.Show($"Ya se encuentra una ubicación Origen seleccionada, ¿Desea cambiarla?", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
-                    txtUbicacionDestino.Text = ubicacionSelected.Trim()
-                    ubicacionOrigen = False
-                End If
-
-
-            End If
-        End If
-
-
-
-
-    End Sub
-
 
     Private Sub CargarMaterialesUbicacion(ubicacion As String)  'método para llenar el combo de materiales.
         'cboBodega.DataSource = Nothing
@@ -112,6 +56,8 @@ Public Class frmTrasladosMateriales_Ubicacion
                 valoresCombo.Add(drCombo("f302_Material").ToString(), drCombo("f302_Material").ToString() + "-" + drCombo("f106_Descripcion").ToString())
             Next
             Utilidades.CargarCombo(cboMateriales, valoresCombo, True, "---")
+            cboMateriales.Enabled = True
+            cboLote.Enabled = True
 
 
         Catch ex As Exception
@@ -212,91 +158,6 @@ Public Class frmTrasladosMateriales_Ubicacion
     End Sub
 
 
-    Private Sub CargaData_lotesEncontrados(ubicacion As String)
-        If cboLote.SelectedValue.ToString() <> Nothing Then
-
-            If tieneSerial = False Then
-
-                If cboLote.SelectedValue.ToString() <> "" And cboLote.SelectedValue.ToString() <> "0" Then
-                    Dim loteSelect As String = cboLote.SelectedValue.ToString()
-                    Dim material = cboMateriales.SelectedValue.ToString()
-
-                    Dim sql As String = "select f302_Cantidad - f302_CantMvtos from t302_Saldos
-                     where f302_Ubicacion = '" + ubicacion.Trim() + "' and f302_Material = '" + material + "' and f302_Cantidad - f302_CantMvtos > 0"
-
-
-                    Dim conexion As clsConexionNew = New clsConexionNew()
-
-                    If loteSelect <> "" And loteSelect <> "0" Then
-                        'agregar a la consulta, el lote seleccionado
-                        sql = sql + " and f302_Lote = '" + loteSelect + "'"
-
-
-                    Else
-                        loteSelect = ""
-                    End If
-
-
-                    Dim respuesta As String
-                    Dim cantidad As Double = 0
-                    Try
-                        respuesta = conexion.GetEscalar(sql).ToString()
-
-
-                    Catch ex As Exception
-                        respuesta = "0"
-                        XtraMessageBox.Show("REVISAR CANTIDAD DISPONIBLE DEL MATERIAL EN SALDOS.", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-                    End Try
-
-
-                    If IsNumeric(respuesta) Then
-                        cantidad = CDec(respuesta)
-                    End If
-
-                    If loteSelect <> "0" Then
-
-                        '    sql = "select SUM(f301_Cantidad) from t300_EncMovimientos
-                        'inner join t301_DetMovimientos on f301_RowIDDocumento = f300_RowID
-                        'where f300_TipoDocumento = 'DVP' and f300_EstadoDoc = 'A' and f301_EstadoMov = 'A'
-                        'and f300_AlmacenOrigen = '" + ALMACEN + "'
-                        'and f301_Referencia = '" + material + "' and f301_Lote = '" + loteSelect + "'"
-                        '    Dim cantMovimiento As String
-
-                        '    cantMovimiento = conexion.GetEscalar(sql).ToString()
-
-                        'If Not String.IsNullOrEmpty(cantMovimiento) Then
-                        '    cantidad = cantidad - CDbl(cantMovimiento)
-                        'End If
-
-
-                        txtCantidadDisponible.Text = cantidad.ToString()
-                        txtCantidadMovimiento.Text = cantidad.ToString()
-                        txtCantidadMovimiento.Select()
-                    Else
-                        txtCantidadDisponible.Text = String.Empty
-                        txtCantidadMovimiento.Text = String.Empty
-                    End If
-                End If
-
-
-            Else
-
-                If txt_SerialMaterial.Text = "" Then
-                    XtraMessageBox.Show("El MATERIAL EXIGE DIGITAR EL SERIAL PARA CONSULTAR EL SALDO DENTRO DEL LOTE.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Else
-                    txt_SerialMaterial.Text = String.Concat("0000000000", txt_SerialMaterial.Text.Trim())
-                    ConsultarSaldo_bySerial(ubicacion.Trim(), txt_SerialMaterial.Text)
-                End If
-
-
-            End If
-
-
-
-        End If
-    End Sub
-
     Private Sub ConsultarSaldo_bySerial(ubicacion As Object, getSerial As Object)
         'Dim serial_dvp As String
         ' Dim sql2 As String
@@ -355,7 +216,7 @@ Public Class frmTrasladosMateriales_Ubicacion
 
     End Sub
 
-    Private Sub GuardarMovimientoTRU()
+    Private Sub GuardarMovimientoTRA()
 
         'lblMensaje.Text = ""
         Try
@@ -408,13 +269,13 @@ Public Class frmTrasladosMateriales_Ubicacion
             LstParametros.Add(New Parametros("@cantidad", CDbl(txtCantidadMovimiento.Text), SqlDbType.Decimal))
             LstParametros.Add(New Parametros("@material", cboMateriales.SelectedValue.ToString(), SqlDbType.VarChar))
             LstParametros.Add(New Parametros("@serialMaterial", txt_SerialMaterial.Text, SqlDbType.VarChar))
-            LstParametros.Add(New Parametros("@almacenOrigen", ALMACEN, SqlDbType.VarChar))
-            LstParametros.Add(New Parametros("@almacenDestino", ALMACEN, SqlDbType.VarChar)) 'almacen de origen y destino deben ser el mismo por tratarse de un traslado de ubicación
+            LstParametros.Add(New Parametros("@almacenOrigen", ALMACEN_ORIGEN, SqlDbType.VarChar))
+            LstParametros.Add(New Parametros("@almacenDestino", ALMACEN_DESTINO, SqlDbType.VarChar)) 'almacen de origen y destino son diferentes 
             LstParametros.Add(New Parametros("@ubicacionOrigen", txtUbicacionOrigen.Text, SqlDbType.VarChar))
             LstParametros.Add(New Parametros("@ubicacionDestino", txtUbicacionDestino.Text, SqlDbType.VarChar))
             LstParametros.Add(New Parametros("@lote", cboLote.Text, SqlDbType.VarChar))
             Dim dt As New DataTable
-            dt = conexion.SPObtenerDataTable("SP_GuardarMovimientoTRU", LstParametros)
+            dt = conexion.SPObtenerDataTable("SP_GuardarMovimientoTRA", LstParametros)
             Dim dr As DataRow
             dr = dt.Rows(0)
             If dr(0).ToString = "" Then
@@ -462,99 +323,7 @@ Public Class frmTrasladosMateriales_Ubicacion
 
     End Sub
 
-
-    Private Sub btnBuscarUbicacion_Click(sender As Object, e As EventArgs) Handles btnBuscarUbicacion.Click
-
-        ubicacionDestino = True
-        Utilidades.BuscarUbicacion("TRU")
-
-    End Sub
-
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
-
-        If String.IsNullOrEmpty(txtUbicacionDestino.Text) Then
-            XtraMessageBox.Show("Se debe selecciona una ubicación de destino.", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-        Else
-
-            XtraTabPage2.PageEnabled = True
-            XtraTabPage4.PageEnabled = True
-            Me.XtraTabControl1.SelectedTabPage = XtraTabPage2
-
-        End If
-
-
-
-    End Sub
-
-    Private Sub btnBuscarUbiOrigen_Click(sender As Object, e As EventArgs) Handles btnBuscarUbiOrigen.Click
-        ubicacionOrigen = True
-        Utilidades.BuscarUbicacion("TRU")
-    End Sub
-
-    Private Sub txtUbicacionOrigen_Leave(sender As Object, e As EventArgs) Handles txtUbicacionOrigen.Leave
-        CargarMaterialesUbicacion(txtUbicacionOrigen.Text)
-    End Sub
-
-    Private Sub cboMateriales_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMateriales.SelectedIndexChanged
-        ConsultarLotes(txtUbicacionOrigen.Text)
-    End Sub
-
-    Private Sub cboLote_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboLote.SelectedIndexChanged
-        ConsultarSaldo_bySerial(txtUbicacionOrigen, txt_SerialMaterial.Text.Trim())
-    End Sub
-
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        GuardarMovimientoTRU()
-    End Sub
-
-    Private Sub btnEditar_Click(sender As Object, e As EventArgs) Handles btnEditar.Click
-        Try
-            Dim f As New frmDocumentosTrasladosUbicaciones(CO, ALMACEN)
-            f.ShowDialog()
-            ROWID = f.rowid
-            f.Dispose()
-            If Not String.IsNullOrEmpty(ROWID) Then
-                SplashScreenManager.ShowForm(Me, GetType(WaitForm1), True, True, False)
-                Dim encabezado As New EncabezadoMovimiento()
-                encabezado = EncabezadoMovimiento.GetEncabezadoMovimiento(ROWID)
-                txtTipoDoct.Text = encabezado.f300_TipoDocumento
-                txtNroDocto.Text = encabezado.f300_NroDocumento.ToString()
-                txtEstado.Text = encabezado.f300_EstadoDoc
-                'Dim res As String = JsonConvert.SerializeObject(encabezado)
-                'MessageBox.Show(res)
-
-                gcDetalle.DataSource = encabezado.listDetalleMovimiento
-                gvDetalle.BestFitColumns()
-
-                SplashScreenManager.CloseForm(False)
-                'cboMateriales.SelectedIndex = 0
-                txtCantidadDisponible.Text = ""
-                txtCantidadMovimiento.Text = ""
-                XtraTabPage2.PageEnabled = True
-                XtraTabPage4.PageEnabled = True
-                If encabezado.f300_EstadoDoc = "A" Then
-                    Me.XtraTabControl1.SelectedTabPage = XtraTabPage2
-                End If
-            End If
-
-
-
-        Catch ex As Exception
-            XtraTabPage2.PageEnabled = False
-            XtraTabPage4.PageEnabled = False
-            SplashScreenManager.CloseForm(False)
-            'cboMateriales.SelectedIndex = 0
-            txtCantidadDisponible.Text = ""
-            txtCantidadMovimiento.Text = ""
-            ROWID = ""
-            txtTipoDoct.Text = ""
-            txtNroDocto.Text = ""
-            txtEstado.Text = ""
-        End Try
-    End Sub
-
-    Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
+    Private Sub CerrarMovimientoTRA()
         If String.IsNullOrEmpty(ROWID) Then
             XtraMessageBox.Show("Error: " + "Ningun documento cargado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
@@ -563,12 +332,12 @@ Public Class frmTrasladosMateriales_Ubicacion
         If XtraMessageBox.Show("¿Esta seguro de cerrar el documento?", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
             SplashScreenManager.ShowForm(Me, GetType(WaitForm1), True, True, False)
             Dim respuesta As String
-            respuesta = EncabezadoMovimiento.CerrarMovimientoTRU(ROWID)
+            respuesta = EncabezadoMovimiento.CerrarMovimientoTrasladoTRA(ROWID)
             SplashScreenManager.CloseForm(False)
             If String.IsNullOrEmpty(respuesta) Then
 
                 XtraTabPage2.PageEnabled = False
-                XtraTabPage4.PageEnabled = False
+                XtraTabPage3.PageEnabled = False
                 lblMensaje.Text = ""
                 txtUbicacionDestino.Text = ""
                 txtUbicacionOrigen.Text = ""
@@ -592,5 +361,170 @@ Public Class frmTrasladosMateriales_Ubicacion
 
 
         End If
+    End Sub
+
+    Private Sub EditarDocumentoAbiertoTRA()
+        Try
+            Dim f As New frmDocumentosTrasladosUbiAlmacenes(CO, ALMACEN)
+            f.ShowDialog()
+            ROWID = f.rowid
+            f.Dispose()
+            If Not String.IsNullOrEmpty(ROWID) Then
+                SplashScreenManager.ShowForm(Me, GetType(WaitForm1), True, True, False)
+                Dim encabezado As New EncabezadoMovimiento()
+                encabezado = EncabezadoMovimiento.GetEncabezadoMovimiento(ROWID)
+                txtTipoDoct.Text = encabezado.f300_TipoDocumento
+                txtNroDocto.Text = encabezado.f300_NroDocumento.ToString()
+                txtEstado.Text = encabezado.f300_EstadoDoc
+                'Dim res As String = JsonConvert.SerializeObject(encabezado)
+                'MessageBox.Show(res)
+
+                gcDetalle.DataSource = encabezado.listDetalleMovimiento
+                gvDetalle.BestFitColumns()
+
+                SplashScreenManager.CloseForm(False)
+                'cboMateriales.SelectedIndex = 0
+                txtCantidadDisponible.Text = ""
+                txtCantidadMovimiento.Text = ""
+                XtraTabPage2.PageEnabled = True
+                XtraTabPage3.PageEnabled = True
+                If encabezado.f300_EstadoDoc = "A" Then
+                    Me.XtraTabControl1.SelectedTabPage = XtraTabPage2
+                End If
+            End If
+
+
+
+        Catch ex As Exception
+            XtraTabPage2.PageEnabled = False
+            XtraTabPage3.PageEnabled = False
+            SplashScreenManager.CloseForm(False)
+            'cboMateriales.SelectedIndex = 0
+            txtCantidadDisponible.Text = ""
+            txtCantidadMovimiento.Text = ""
+            ROWID = ""
+            txtTipoDoct.Text = ""
+            txtNroDocto.Text = ""
+            txtEstado.Text = ""
+        End Try
+    End Sub
+
+    Private Sub GetAlmacenDeUbicacion(ubicacion As String)
+        Dim AlmacenUbicacion = AlmacenUbicaciones.GetAlmacen_ByUbicacion(ubicacion)
+        Dim Nombre_Almacen = AlmacenUbicacion._descAlmacen
+        Dim cod_Almacen = AlmacenUbicacion._almacenUbic
+
+        If ubicacionDestino Then
+            txtAlmDestino.Text = Nombre_Almacen
+            ALMACEN_DESTINO = cod_Almacen
+            CargarMaterialesUbicacion(ubicacion)
+
+        ElseIf ubicacionOrigen Then
+            txtAlmOrigen.Text = Nombre_Almacen
+            ALMACEN_ORIGEN = cod_Almacen
+            CargarMaterialesUbicacion(ubicacion)
+
+        End If
+
+
+    End Sub
+
+    Public Sub RecibirUbicacion(ubicacionSelected As String)
+
+
+
+        If ubicacionDestino Then
+
+            If String.IsNullOrEmpty(txtUbicacionDestino.Text) Then
+                txtUbicacionDestino.Text = ubicacionSelected.Trim()
+                GetAlmacenDeUbicacion(ubicacionSelected.Trim())
+                ubicacionDestino = False
+            Else
+
+
+                If XtraMessageBox.Show($"Ya se encuentra una ubicación Destino seleccionada, ¿Desea cambiarla?", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
+                    txtUbicacionDestino.Text = ubicacionSelected.Trim()
+                    ubicacionDestino = False
+                End If
+            End If
+
+
+        ElseIf ubicacionOrigen Then
+            Dim iguales As Boolean
+
+            If String.IsNullOrEmpty(txtUbicacionOrigen.Text) Then
+                GetAlmacenDeUbicacion(ubicacionSelected.Trim())
+                txtUbicacionOrigen.Text = ubicacionSelected.Trim()
+                ubicacionOrigen = False
+
+                iguales = txtUbicacionDestino.Text.Trim().Equals(txtUbicacionOrigen.Text.Trim())
+                If iguales Then
+                    XtraMessageBox.Show("La ubicación de destino y origen, no pueden se iguales", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    txtUbicacionOrigen.Text = ""
+
+                End If
+
+
+            Else
+
+                If XtraMessageBox.Show($"Ya se encuentra una ubicación Origen seleccionada, ¿Desea cambiarla?", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
+                    txtUbicacionDestino.Text = ubicacionSelected.Trim()
+                    ubicacionOrigen = False
+                End If
+
+
+            End If
+        End If
+
+
+
+
+    End Sub
+
+
+
+    Private Sub btnBuscarUbicacionDestino_Click(sender As Object, e As EventArgs) Handles btnBuscarUbicacionDestino.Click
+        ubicacionDestino = True
+        Utilidades.BuscarUbicacion("TRA")
+
+    End Sub
+
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+        If String.IsNullOrEmpty(txtUbicacionDestino.Text) Then
+            XtraMessageBox.Show("Se debe selecciona una ubicación de destino.", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+        Else
+
+            XtraTabPage2.PageEnabled = True
+            XtraTabPage3.PageEnabled = True
+            Me.XtraTabControl1.SelectedTabPage = XtraTabPage2
+
+        End If
+
+    End Sub
+
+    Private Sub btnBuscarUbiOrigen_Click(sender As Object, e As EventArgs) Handles btnBuscarUbiOrigen.Click
+        ubicacionOrigen = True
+        Utilidades.BuscarUbicacion("TRA")
+    End Sub
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        GuardarMovimientoTRA()
+    End Sub
+
+    Private Sub cboMateriales_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMateriales.SelectedIndexChanged
+        ConsultarLotes(txtUbicacionOrigen.Text)
+    End Sub
+
+    Private Sub cboLote_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboLote.SelectedIndexChanged
+        ConsultarSaldo_bySerial(txtUbicacionOrigen.Text, txt_SerialMaterial.Text.Trim())
+    End Sub
+
+    Private Sub btnEditar_Click(sender As Object, e As EventArgs) Handles btnEditar.Click
+        EditarDocumentoAbiertoTRA()
+    End Sub
+
+    Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
+        CerrarMovimientoTRA()
     End Sub
 End Class

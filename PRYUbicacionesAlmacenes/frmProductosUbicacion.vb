@@ -24,14 +24,14 @@ Public Class frmProductosUbicacion
 
     Private Sub carga_totales()
 
-        CType(gcPrincipal.MainView, GridView).Columns(2).SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
+        CType(gcPrincipal.MainView, GridView).Columns(4).SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
 
         ' In the below line we have to define the field name on which we have to perform the operation
-        CType(gcPrincipal.MainView, GridView).Columns(2).SummaryItem.FieldName = "cantidad"
+        CType(gcPrincipal.MainView, GridView).Columns(4).SummaryItem.FieldName = "cantidad"
 
         'in the below line we have to define the format of tect which will display on the footer. You can also round up the calcuations
         ' CType(gcPrincipal.MainView, GridView).Columns(5).SummaryItem.DisplayFormat = "Total.Medios= {0:F2}"
-        CType(gcPrincipal.MainView, GridView).Columns(2).SummaryItem.DisplayFormat = "TOT= {0:F2}"
+        CType(gcPrincipal.MainView, GridView).Columns(4).SummaryItem.DisplayFormat = "TOT= {0:F4}"
 
     End Sub
 

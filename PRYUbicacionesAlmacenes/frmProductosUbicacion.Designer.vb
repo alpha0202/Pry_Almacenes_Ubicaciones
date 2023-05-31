@@ -23,11 +23,13 @@ Partial Class frmProductosUbicacion
         Me.gcPrincipal = New DevExpress.XtraGrid.GridControl()
         Me.gvProductos = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.btnSalir = New DevExpress.XtraEditors.SimpleButton()
         Me.lblUbicacionNombre = New System.Windows.Forms.Label()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.gcPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gvProductos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -43,7 +45,7 @@ Partial Class frmProductosUbicacion
         '
         'gvProductos
         '
-        Me.gvProductos.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn4, Me.GridColumn3})
+        Me.gvProductos.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn5, Me.GridColumn6, Me.GridColumn2, Me.GridColumn4, Me.GridColumn3})
         Me.gvProductos.GridControl = Me.gcPrincipal
         Me.gvProductos.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "medios", Nothing, "(# MEDIOS: SUMA={0:#.##})")})
         Me.gvProductos.Name = "gvProductos"
@@ -60,6 +62,20 @@ Partial Class frmProductosUbicacion
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
         Me.GridColumn1.VisibleIndex = 0
+        Me.GridColumn1.Width = 128
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "SERIAL"
+        Me.GridColumn5.FieldName = "f302_SerialMaterial"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.OptionsColumn.AllowEdit = False
+        Me.GridColumn5.OptionsColumn.AllowFocus = False
+        Me.GridColumn5.OptionsFilter.AllowAutoFilter = False
+        Me.GridColumn5.OptionsFilter.AllowFilter = False
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 1
+        Me.GridColumn5.Width = 66
         '
         'GridColumn2
         '
@@ -67,7 +83,8 @@ Partial Class frmProductosUbicacion
         Me.GridColumn2.FieldName = "f106_Descripcion"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 1
+        Me.GridColumn2.VisibleIndex = 3
+        Me.GridColumn2.Width = 179
         '
         'GridColumn4
         '
@@ -77,7 +94,8 @@ Partial Class frmProductosUbicacion
         Me.GridColumn4.FieldName = "cantidad"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 2
+        Me.GridColumn4.VisibleIndex = 4
+        Me.GridColumn4.Width = 144
         '
         'GridColumn3
         '
@@ -101,6 +119,19 @@ Partial Class frmProductosUbicacion
         Me.lblUbicacionNombre.Name = "lblUbicacionNombre"
         Me.lblUbicacionNombre.Size = New System.Drawing.Size(0, 18)
         Me.lblUbicacionNombre.TabIndex = 2
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "LOTE"
+        Me.GridColumn6.FieldName = "f302_Lote"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.OptionsColumn.AllowEdit = False
+        Me.GridColumn6.OptionsColumn.AllowFocus = False
+        Me.GridColumn6.OptionsFilter.AllowAutoFilter = False
+        Me.GridColumn6.OptionsFilter.AllowFilter = False
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 2
+        Me.GridColumn6.Width = 66
         '
         'frmProductosUbicacion
         '
@@ -131,4 +162,6 @@ Partial Class frmProductosUbicacion
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents lblUbicacionNombre As System.Windows.Forms.Label
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

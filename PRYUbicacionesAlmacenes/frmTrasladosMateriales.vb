@@ -612,7 +612,7 @@ Public Class frmTrasladosMateriales_Ubicacion
     Private Sub btnBuscarUbiOrigen_Click(sender As Object, e As EventArgs) Handles btnBuscarUbiOrigen.Click
         ubicacionOrigen = True
         Utilidades.BuscarUbicacion("TRU")
-        Utilidades.ExisteUbicacionSeleccionada(txtUbicacionOrigen.Text.Trim())
+        'Utilidades.ExisteUbicacionSeleccionada(txtUbicacionOrigen.Text.Trim())
 
     End Sub
 

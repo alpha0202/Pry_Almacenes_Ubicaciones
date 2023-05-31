@@ -382,11 +382,13 @@ Public Class FrmBodegas
     Private Sub DiseñoAlmacenes(ds As DataSet)
 
         'verificar si la consulta de elementos para diseñar, no tiene registros.
-        'dt = ds.Tables(0)
-        'If (dt.Rows.Count = 0) Then
-        '    MessageBox.Show("No existe material en las ubicaciones para mostrar.", "Información")
-        '    Return
-        'End If
+
+        dt = ds.Tables(0)
+        If (dt.Rows.Count = 0) Or ds.Tables.Count = 0 Then
+            XtraMessageBox.Show("No existe material en las ubicaciones para mostrar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            cboMateriales.SelectedIndex = 0
+            Return
+        End If
 
         'extracción de datos por cada datatable
         dtCelda = ds.Tables(0)
@@ -395,41 +397,41 @@ Public Class FrmBodegas
         dtFilas = ds.Tables(3)
         'dtTotalOrdenCel = ds.Tables(3)
         'dtFilasUbicaciones = ds.Tables(6)
+        Try
 
+            'columnas
+            Dim listCol As List(Of Columna) = New List(Of Columna)()
 
-        'columnas
-        Dim listCol As List(Of Columna) = New List(Of Columna)()
-
-        For col As Integer = 0 To dtColumnas.Rows.Count - 1
-            listCol.Add(New Columna With
+            For col As Integer = 0 To dtColumnas.Rows.Count - 1
+                listCol.Add(New Columna With
                 {.Columnas = CStr(dtColumnas.Rows(col)("columnas"))
                 })
-        Next
-        listCol.ToArray()
-        Dim jsColumna = JsonConvert.SerializeObject(listCol)
-        'Dim parsejson As JObject = JObject.Parse(jsColumna)
-        Dim dsCol As List(Of Columna) = JsonConvert.DeserializeObject(Of List(Of Columna))(jsColumna)
-        '-----
+            Next
+            listCol.ToArray()
+            Dim jsColumna = JsonConvert.SerializeObject(listCol)
+            'Dim parsejson As JObject = JObject.Parse(jsColumna)
+            Dim dsCol As List(Of Columna) = JsonConvert.DeserializeObject(Of List(Of Columna))(jsColumna)
+            '-----
 
-        'filas
-        Dim totalFilas As Integer = CInt(dtFilas.Rows(0)(0).ToString())
+            'filas
+            Dim totalFilas As Integer = CInt(dtFilas.Rows(0)(0).ToString())
 
-        Dim listFila As List(Of Filas) = New List(Of Filas)()
-        For row As Integer = 1 To totalFilas
-            listFila.Add(New Filas With
+            Dim listFila As List(Of Filas) = New List(Of Filas)()
+            For row As Integer = 1 To totalFilas
+                listFila.Add(New Filas With
                 {.Filas = row
                 })
-        Next
-        listFila.ToArray()
-        Dim jsRows = JsonConvert.SerializeObject(listFila)
-        Dim dsRows As List(Of Filas) = JsonConvert.DeserializeObject(Of List(Of Filas))(jsRows)
-        '-------
+            Next
+            listFila.ToArray()
+            Dim jsRows = JsonConvert.SerializeObject(listFila)
+            Dim dsRows As List(Of Filas) = JsonConvert.DeserializeObject(Of List(Of Filas))(jsRows)
+            '-------
 
 
-        'celda
-        Dim listCel As List(Of Celdas) = New List(Of Celdas)()
-        For cel As Integer = 0 To dtPosicion.Rows.Count - 1
-            listCel.Add(New Celdas With
+            'celda
+            Dim listCel As List(Of Celdas) = New List(Of Celdas)()
+            For cel As Integer = 0 To dtPosicion.Rows.Count - 1
+                listCel.Add(New Celdas With
                 {
                  .Columna = CStr(dtPosicion.Rows(cel)("f105_Columna")),
                  .Fila = CInt(dtPosicion.Rows(cel)("f105_Fila")),
@@ -437,12 +439,17 @@ Public Class FrmBodegas
                  .Posiciones = GetPosiciones(CStr(dtPosicion.Rows(cel)("f105_Columna")), CInt(dtPosicion.Rows(cel)("f105_Fila")))
                 }
                 )
-        Next
-        Dim jsCel As String = JsonConvert.SerializeObject(listCel, Formatting.Indented)
-        Dim dsCel As List(Of Celdas) = JsonConvert.DeserializeObject(Of List(Of Celdas))(jsCel)
-        '-------
+            Next
+            Dim jsCel As String = JsonConvert.SerializeObject(listCel, Formatting.Indented)
+            Dim dsCel As List(Of Celdas) = JsonConvert.DeserializeObject(Of List(Of Celdas))(jsCel)
+            '-------
 
-        ModelarUbicaciones(dsCel, dsCol, dsRows, totalFilas, dtColumnas, dtFilas, dtTotalOrdenCel)
+            ModelarUbicaciones(dsCel, dsCol, dsRows, totalFilas, dtColumnas, dtFilas, dtTotalOrdenCel)
+
+        Catch ex As Exception
+
+        End Try
+
 
     End Sub
 
@@ -710,10 +717,13 @@ Public Class FrmBodegas
         LstParametros.Add(New Parametros("@Almacen", selectedAlm, SqlDbType.VarChar))
         LstParametros.Add(New Parametros("@CO", selectedCO, SqlDbType.VarChar))
         dsfilter = conexion.SPGetDataSet("SP_FilterUbicaciones_CO_Almacen", LstParametros)
-        LimpiarControles()
+        'LimpiarControles()
         'cboCentroOpe.SelectedIndex = 0
         'cboBodega.SelectedIndex = 0
         'txtCentroOpe.Text = ""
+        flpColumnas.Controls.Clear()
+        flpFilas.Controls.Clear()
+        flpGrupoCeldas.Controls.Clear()
         cboMateriales.SelectedIndex = 0
         btnFiltrar.Enabled = False
         DiseñoAlmacenes(dsfilter)
@@ -755,8 +765,8 @@ Public Class FrmBodegas
         flpFilas.Controls.Clear()
         flpGrupoCeldas.Controls.Clear()
         'cboMateriales.SelectedIndex = 0
-        'cboCentroOpe.SelectedIndex = 0
-        'cboBodega.SelectedValue = 0
+        cboCentroOpe.SelectedIndex = 0
+        cboBodega.SelectedValue = 0
 
     End Sub
 

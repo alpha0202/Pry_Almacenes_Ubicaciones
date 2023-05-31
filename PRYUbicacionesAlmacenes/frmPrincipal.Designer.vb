@@ -38,13 +38,13 @@
         Me.BarButtonItem4 = New DevExpress.XtraBars.BarButtonItem()
         Me.Bar3 = New DevExpress.XtraBars.Bar()
         Me.BarHeaderItem1 = New DevExpress.XtraBars.BarHeaderItem()
-        Me.BarVersion = New DevExpress.XtraBars.BarStaticItem()
         Me.BarHeaderItem2 = New DevExpress.XtraBars.BarHeaderItem()
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
         Me.BarButtonItem5 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarVersion = New DevExpress.XtraBars.BarStaticItem()
         Me.XtraTabbedMdiManager1 = New DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(Me.components)
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -150,11 +150,6 @@
         Me.BarHeaderItem1.Id = 9
         Me.BarHeaderItem1.Name = "BarHeaderItem1"
         '
-        'BarVersion
-        '
-        Me.BarVersion.Id = 10
-        Me.BarVersion.Name = "BarVersion"
-        '
         'BarHeaderItem2
         '
         Me.BarHeaderItem2.Appearance.BackColor = System.Drawing.Color.Transparent
@@ -204,6 +199,11 @@
         Me.BarButtonItem5.Caption = "Traslados"
         Me.BarButtonItem5.Id = 5
         Me.BarButtonItem5.Name = "BarButtonItem5"
+        '
+        'BarVersion
+        '
+        Me.BarVersion.Id = 10
+        Me.BarVersion.Name = "BarVersion"
         '
         'XtraTabbedMdiManager1
         '
